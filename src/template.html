@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Găitoane &amp; Dăescu | Cercetare clinică și statistică medicală</title>
+<meta name="description" content="Asistență în cercetarea clinică: de la proiectarea studiului și analiza statistică până la publicarea articolului.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EAEFF3;      /* hârtie de laborator, rece */
+  --sheet:#FFFFFF;
+  --ink:#1A2533;        /* cerneală bleumarin */
+  --ink-soft:#4C5A6B;
+  --band:#C7D0DA;       /* banda de încredere */
+  --rule:#B6C1CC;
+  --signal:#C8322B;     /* roșul liniei de regresie */
+  --deep:#16334F;
+  --ok:#1F6B4F;
+  --serif:"Spectral", Georgia, serif;
+  --sans:"Instrument Sans", system-ui, -apple-system, sans-serif;
+  --gutter:clamp(16px, 4vw, 56px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 1.0625rem/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- header ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+.brand{font:500 1.0625rem/1.2 var(--serif);text-decoration:none;letter-spacing:.005em}
+.brand small{display:block;font:400 .8125rem/1.3 var(--sans);color:var(--ink-soft)}
+.top nav{display:flex;gap:22px;font-size:.9375rem}
+.top nav a{text-decoration:none;color:var(--ink-soft)}
+.top nav a:hover{color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,72px);align-items:start;padding:clamp(32px,7vw,88px) 0 clamp(48px,8vw,104px)}
+.hero h1{
+  font:400 clamp(2.4rem,5.4vw,4.25rem)/1.04 var(--serif);
+  letter-spacing:-.018em;margin:0 0 22px;text-wrap:balance;
+}
+.hero .slogan{font:italic 400 clamp(1.15rem,1.8vw,1.375rem)/1.4 var(--serif);color:var(--deep);margin:0 0 18px}
+.hero .lede{max-width:46ch;color:var(--ink-soft);margin:0 0 30px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font:600 1rem/1 var(--sans);color:#fff;background:var(--ink);
+  border:0;border-radius:3px;padding:16px 24px;cursor:pointer;text-decoration:none;
+  transition:background .2s;
+}
+.btn:hover{background:var(--deep)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+
+.hero > div:first-child{position:sticky;top:40px;padding-top:clamp(0px,4vw,48px)}
+@media (max-width:920px){.hero > div:first-child{position:static;padding-top:0}}
+/* ---------- about ---------- */
+.about{border-top:1px solid var(--rule);padding:clamp(48px,7vw,88px) 0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px)}
+.about h2,.section-head h2,.form-intro h2{font:400 clamp(1.75rem,3.2vw,2.5rem)/1.12 var(--serif);letter-spacing:-.01em;margin:0}
+.about p{margin:0 0 1em;max-width:62ch;font-family:var(--serif);font-size:1.125rem;line-height:1.7}
+.methods{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.methods li{font-size:.875rem;padding:6px 12px;border:1px solid var(--rule);border-radius:999px;background:rgba(255,255,255,.55)}
+
+/* ---------- cine ce face (în hero) ---------- */
+.roles{--you:#E0A23A;--us:var(--deep);margin:0;background:var(--sheet);border-radius:24px;border:1px solid var(--rule);box-shadow:0 40px 80px -48px rgba(22,51,79,.45);overflow:hidden}
+.roles-head{padding:clamp(18px,2.4vw,26px) clamp(18px,2.4vw,26px) 16px;border-bottom:1px solid #E1E7ED}
+.roles-head h2{font:400 1.5rem/1.15 var(--serif);margin:0 0 6px}
+.roles-head p{margin:0 0 14px;color:var(--ink-soft);font-size:.875rem;line-height:1.5}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.8125rem;font-weight:500}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:22px;height:8px;border-radius:99px;flex:none}
+.legend .y i{background:var(--you)}.legend .u i{background:var(--us)}
+.r-list{list-style:none;margin:0;padding:0}
+.r-list li{display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:8px;padding:12px clamp(18px,2.4vw,26px);border-top:1px solid #EDF1F5}
+.r-list li:first-child{border-top:0}
+.r-list li > div{grid-column:1 / -1}
+.r-num{font:400 .9375rem/1.3 var(--serif);color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.r-stage{font:500 1rem/1.3 var(--serif)}
+.r-bar{display:flex;gap:3px;height:8px;margin:8px 0 8px}
+.r-bar .y{flex:0 0 var(--y);background:var(--you);border-radius:99px 0 0 99px}
+.r-bar .u{flex:1;background:var(--us);border-radius:0 99px 99px 0}
+.r-who{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:.78rem;line-height:1.4;color:var(--ink-soft)}
+.r-who p{margin:0;min-width:0}
+.r-who b{font-weight:600;color:var(--ink)}
+.r-who .yy b{color:#8A5A0B}
+.r-note{font-size:.75rem;color:var(--ink-soft);margin:0;padding:12px clamp(18px,2.4vw,26px) 16px;border-top:1px solid #E1E7ED;background:#F7F9FB}
+@media (max-width:420px){.r-who{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- gallery ---------- */
+.gallery{overflow:hidden;background:var(--ink);color:#E9EEF3;padding:clamp(56px,8vw,104px) 0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:clamp(28px,4vw,44px);flex-wrap:wrap}
+.section-head p{margin:10px 0 0;color:#A9B6C4;max-width:52ch}
+.counter{font:400 1rem var(--serif);color:#A9B6C4;font-variant-numeric:tabular-nums}
+.viewer{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(20px,3vw,40px);align-items:start}
+.stage{position:relative;aspect-ratio:4/3;max-height:640px;width:100%;touch-action:pan-y}
+.sheet{
+  position:absolute;inset:0;background:#fff;
+  display:flex;align-items:center;justify-content:center;padding:clamp(10px,2vw,22px);
+  transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .45s;
+  box-shadow:0 1px 0 rgba(0,0,0,.25),0 18px 40px -18px rgba(0,0,0,.6);
+  cursor:zoom-in;border:0;width:100%;
+}
+.sheet img{max-width:100%;max-height:100%;object-fit:contain}
+.sheet[data-pos="0"]{z-index:3;transform:none}
+.sheet[data-pos="1"]{z-index:2;transform:translate(14px,-12px) rotate(1.6deg);opacity:.55;pointer-events:none}
+.sheet[data-pos="2"]{z-index:1;transform:translate(26px,-22px) rotate(3deg);opacity:.25;pointer-events:none}
+.sheet[data-pos="hide"]{z-index:0;opacity:0;transform:translate(-40px,0) rotate(-3deg);pointer-events:none}
+@media (prefers-reduced-motion: reduce){.sheet{transition:none}}
+.stage-ctrl{display:flex;gap:10px;margin-top:22px;align-items:center}
+.round{width:46px;height:46px;border-radius:50%;border:1.5px solid #5D6E81;background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;transition:border-color .2s,background .2s}
+.round:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+.round svg{width:18px;height:18px}
+.hint{font-size:.8125rem;color:#8A99AA;margin-left:8px}
+.index{list-style:none;margin:0;padding:0;border-top:1px solid #33435A}
+.index button{
+  all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;
+  padding:16px 0 16px 18px;border-bottom:1px solid #33435A;position:relative;
+}
+.index button::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:3px;background:transparent;transition:background .25s}
+.index button[aria-current="true"]::before{background:var(--signal)}
+.index .t{display:block;font:500 1.0625rem/1.3 var(--serif);color:#E9EEF3}
+.index .d{display:block;font-size:.84rem;color:#94A3B4;margin-top:4px;line-height:1.45}
+.index button:not([aria-current="true"]) .t{color:#B3C0CD}
+.index button:hover .t{color:#fff}
+.index button:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1200px,96vw);max-height:94vh;width:100%}
+dialog.lb::backdrop{background:rgba(12,18,27,.88)}
+.lb-inner{background:#fff;padding:clamp(10px,2vw,20px);position:relative}
+.lb-inner img{max-height:82vh;margin:0 auto;width:auto}
+.lb-close{position:absolute;top:-52px;right:0;border-color:#8A99AA}
+.lb-cap{color:#E9EEF3;font:400 1rem var(--serif);margin-top:12px;text-align:center}
+
+/* ---------- form ---------- */
+.form-sec{padding:clamp(56px,8vw,104px) 0}
+.form-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(28px,5vw,80px);align-items:start}
+.form-intro{position:sticky;top:28px}
+.form-intro p{color:var(--ink-soft);max-width:40ch}
+.form-intro .mail{margin-top:24px;font-size:.9375rem;color:var(--ink-soft);border-left:3px solid var(--signal);padding-left:14px}
+form{background:var(--sheet);border:1px solid var(--rule);padding:clamp(22px,4vw,48px)}
+.q{border:0;margin:0 0 34px;padding:0;min-width:0}
+.q:last-of-type{margin-bottom:28px}
+.q > legend,.q > label.qt{display:block;font:500 1.1875rem/1.35 var(--serif);margin:0 0 4px;padding:0}
+.q .help{display:block;font-size:.875rem;color:var(--ink-soft);margin:0 0 12px}
+.req{color:var(--signal)}
+input[type=text],textarea{
+  width:100%;font:400 1rem/1.4 var(--sans);color:var(--ink);
+  background:transparent;border:0;border-bottom:1.5px solid var(--rule);
+  padding:10px 2px;border-radius:0;transition:border-color .2s;
+}
+textarea{resize:vertical;min-height:96px;border:1.5px solid var(--rule);padding:12px}
+input[type=text]:hover,textarea:hover{border-color:var(--ink-soft)}
+input[type=text]:focus,textarea:focus{outline:none;border-color:var(--ink)}
+input::placeholder,textarea::placeholder{color:#8C99A7}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:14px;align-items:flex-start;padding:12px 14px;border:1px solid var(--rule);cursor:pointer;transition:border-color .2s,background .2s;line-height:1.45}
+.opt:hover{border-color:var(--ink-soft)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.mark{flex:none;width:20px;height:20px;margin-top:1px;border:1.5px solid var(--ink-soft);display:grid;place-items:center;background:#fff;transition:all .15s}
+.radio .mark{border-radius:50%}
+.mark::after{content:"";width:10px;height:10px;transform:scale(0);transition:transform .15s;background:#fff}
+.radio .mark::after{border-radius:50%}
+.check .mark::after{width:11px;height:6px;background:none;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) scale(0);margin-top:-3px}
+.opt input:checked + .mark{background:var(--ink);border-color:var(--ink)}
+.opt input:checked + .mark::after{transform:scale(1)}
+.check input:checked + .mark::after{transform:rotate(-45deg) scale(1)}
+.opt:has(input:checked){border-color:var(--ink);background:#F3F6F9}
+.opt input:focus-visible + .mark{outline:2px solid var(--signal);outline-offset:2px}
+.opt.whole{border-style:solid;border-width:1px 1px 1px 3px;border-left-color:var(--deep)}
+.err{display:none;color:var(--signal);font-size:.875rem;margin-top:8px}
+.q.invalid .err{display:block}
+.q.invalid input[type=text]{border-color:var(--signal)}
+.q.invalid .opt{border-color:#E1B3AF}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-top:1px solid var(--rule);padding-top:26px}
+.actions .note{font-size:.8125rem;color:var(--ink-soft);max-width:36ch;margin:0}
+.btn[disabled]{opacity:.6;cursor:progress}
+.spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:rot .8s linear infinite;display:none}
+.btn.loading .spin{display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.status{margin-top:20px;padding:16px 18px;border-left:3px solid;display:none;font-size:.9375rem}
+.status.show{display:block}
+.status.ok{border-color:var(--ok);background:#E7F2EC;color:#18402F}
+.status.bad{border-color:var(--signal);background:#F8E9E7;color:#5E1A16}
+.status a{font-weight:600}
+.done{text-align:left;padding:clamp(8px,2vw,16px) 0}
+.done h3{font:400 1.75rem/1.2 var(--serif);margin:0 0 10px}
+.done p{color:var(--ink-soft);margin:0 0 22px;max-width:46ch}
+
+.warn{display:flex;gap:12px;align-items:flex-start;background:#FBF3E4;border:1px solid #EBD3A6;border-radius:12px;padding:14px 16px;margin:0 0 32px;font-size:.9rem;line-height:1.5;color:#5C3D06}
+.warn svg{flex:none;width:20px;height:20px;margin-top:1px;color:#B7791F}
+.linkbtn{all:unset;cursor:pointer;text-decoration:underline;text-underline-offset:2px;color:var(--ink)}
+.linkbtn:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+dialog.pv{border:0;border-radius:20px;padding:0;max-width:min(680px,94vw);max-height:88vh;width:100%;color:var(--ink);box-shadow:0 40px 80px -20px rgba(12,18,27,.5)}
+dialog.pv::backdrop{background:rgba(12,18,27,.6)}
+.pv-inner{padding:clamp(22px,4vw,40px);overflow:auto;max-height:88vh}
+.pv h2{font:400 1.75rem/1.2 var(--serif);margin:0 0 6px}
+.pv h3{font:600 1rem/1.3 var(--sans);margin:22px 0 6px}
+.pv p,.pv li{font-size:.9375rem;line-height:1.6;color:var(--ink-soft);margin:0 0 8px}
+.pv ul{padding-left:20px;margin:0 0 8px}
+.pv a{color:var(--ink)}
+.pv .pv-close{position:sticky;top:0;float:right;border-color:var(--rule);color:var(--ink);background:#fff;margin:-8px -8px 0 12px}
+.pv .pv-close:hover{background:var(--paper);border-color:var(--ink)}
+footer{border-top:1px solid var(--rule);padding:28px 0 40px;font-size:.875rem;color:var(--ink-soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- responsive ---------- */
+@media (max-width: 920px){
+  .hero,.about,.form-grid{grid-template-columns:1fr}
+  .form-intro{position:static}
+  .viewer{grid-template-columns:1fr}
+  .index{display:flex;overflow-x:auto;border-top:0;gap:8px;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .index li{flex:0 0 72%;scroll-snap-align:start}
+  .index button{border:1px solid #33435A;padding:12px 14px 12px 18px;height:100%}
+  .index .d{display:none}
+}
+@media (max-width: 560px){
+  .top nav{display:none}
+  .stage{aspect-ratio:1/1}
+  .sheet[data-pos="1"]{transform:translate(8px,-8px) rotate(1.4deg)}
+  .sheet[data-pos="2"]{transform:translate(14px,-14px) rotate(2.6deg)}
+  .hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#">Găitoane &amp; Dăescu<small>Cercetare clinică și statistică medicală</small></a>
+    <nav aria-label="Navigare">
+      <a href="#despre">Despre noi</a>
+      <a href="#roluri">Aportul fiecărei părți</a>
+      <a href="#articole">Articole</a>
+      <a href="#formular">Formular</a>
+    </nav>
+  </header>
+
+  <main>
+  <section class="hero">
+    <div>
+      <h1>Fiecare studiu are o poveste. O spunem cu cifre.</h1>
+      <p class="slogan">De la întrebarea de cercetare la articolul publicat.</p>
+      <p class="lede">Doi medici psihiatri specializați în cercetare clinică și statistică medicală. Vă ajutăm cu o singură etapă sau cu întregul proiect.</p>
+      <div class="ctas">
+        <a class="btn" href="#formular">Descrieți proiectul</a>
+        <a class="btn ghost" href="#articole">Vedeți articolele</a>
+      </div>
+    </div>
+
+    <section class="roles" id="roluri" aria-labelledby="rolT">
+    <div class="roles-head">
+      <div>
+        <h2 id="rolT">Aportul fiecărei părți</h2>
+        <p>Dumneavoastră aduceți expertiza clinică și datele. Noi ne ocupăm de metodă, statistică și drumul până la publicare.</p>
+      </div>
+      <div class="legend" aria-hidden="true"><span class="y"><i></i>Dumneavoastră</span><span class="u"><i></i>Noi, statisticienii</span></div>
+    </div>
+    <ol class="r-list">
+        <li style="--y:70%">
+          <span class="r-num">1</span>
+          <span class="r-stage">Ideea și întrebarea de cercetare</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 70% dumneavoastră, 30% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Tema, întrebarea clinică și contextul ei.</p><p><b>Noi:</b> O transformăm într-o întrebare la care datele pot răspunde.</p></div>
+          </div>
+        </li>
+        <li style="--y:30%">
+          <span class="r-num">2</span>
+          <span class="r-stage">Obiectivele și designul studiului</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 30% dumneavoastră, 70% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Ce este fezabil în clinica dumneavoastră.</p><p><b>Noi:</b> Obiectivele, tipul de studiu și calculul eșantionului.</p></div>
+          </div>
+        </li>
+        <li style="--y:85%">
+          <span class="r-num">3</span>
+          <span class="r-stage">Colectarea datelor</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 85% dumneavoastră, 15% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Recrutarea pacienților și culegerea datelor.</p><p><b>Noi:</b> Șablonul bazei de date și regulile de codare.</p></div>
+          </div>
+        </li>
+        <li style="--y:25%">
+          <span class="r-num">4</span>
+          <span class="r-stage">Organizarea bazei de date</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 25% dumneavoastră, 75% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Clarificări despre variabile.</p><p><b>Noi:</b> Curățarea, verificarea și codarea datelor.</p></div>
+          </div>
+        </li>
+        <li style="--y:8%">
+          <span class="r-num">5</span>
+          <span class="r-stage">Analiza statistică</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 8% dumneavoastră, 92% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Răspunsuri la întrebări punctuale.</p><p><b>Noi:</b> Analiza completă, cu tabele și figuri.</p></div>
+          </div>
+        </li>
+        <li style="--y:45%">
+          <span class="r-num">6</span>
+          <span class="r-stage">Interpretarea rezultatelor</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 45% dumneavoastră, 55% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Semnificația clinică a rezultatelor.</p><p><b>Noi:</b> Semnificația statistică și limitele studiului.</p></div>
+          </div>
+        </li>
+        <li style="--y:35%">
+          <span class="r-num">7</span>
+          <span class="r-stage">Redactarea manuscrisului</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 35% dumneavoastră, 65% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Introducerea clinică și revizia finală.</p><p><b>Noi:</b> Metodologia, rezultatele și discuția.</p></div>
+          </div>
+        </li>
+        <li style="--y:20%">
+          <span class="r-num">8</span>
+          <span class="r-stage">Alegerea revistei și trimiterea</span>
+          <div>
+            <div class="r-bar" role="img" aria-label="Aproximativ 20% dumneavoastră, 80% noi"><span class="y"></span><span class="u"></span></div>
+            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Aprobarea revistei și a variantei finale.</p><p><b>Noi:</b> Selecția revistei, formatarea și răspunsul la recenzenți.</p></div>
+          </div>
+        </li>
+    </ol>
+    <p class="r-note">Proporțiile sunt orientative. Le stabilim împreună, în funcție de proiect.</p>
+  </section>
+  </section>
+  </main>
+</div>
+
+<div class="wrap">
+  <section class="about" id="despre" aria-labelledby="despreT">
+    <h2 id="despreT">Perspectiva clinicianului, rigoarea statisticianului</h2>
+    <div>
+      <p>Suntem Alexandru Găitoane și Andrei Dăescu, medici specialiști psihiatri, cu specializare în cercetare clinică și statistică medicală și experiență în proiecte de cercetare și publicații științifice în mai multe specialități medicale.</p>
+      <p>Vă însoțim de la formularea întrebării de cercetare până la interpretarea rezultatelor în context clinic, alegerea revistei și trimiterea spre publicare.</p>
+      <ul class="methods" aria-label="Metode cu care lucrăm">
+        <li>Dimensionarea eșantionului</li>
+        <li>Statistică descriptivă</li>
+        <li>Comparații între grupuri</li>
+        <li>Regresie multivariabilă</li>
+        <li>Date longitudinale</li>
+        <li>Analiza supraviețuirii</li>
+        <li>Acuratețe diagnostică</li>
+        <li>Performanță predictivă</li>
+        <li>Revizuiri sistematice și meta-analize</li>
+        <li>Machine learning și deep learning</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<section class="gallery" id="articole" aria-labelledby="artT">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2 id="artT">Din articolele noastre</h2>
+        <p>Câteva figuri și tabele din lucrări publicate. Apăsați pe o pagină pentru a o mări.</p>
+      </div>
+      <span class="counter" id="counter" aria-live="polite">1 din 5</span>
+    </div>
+
+    <div class="viewer">
+      <div>
+        <div class="stage" id="stage"></div>
+        <div class="stage-ctrl">
+          <button class="round" id="prev" type="button" aria-label="Pagina anterioară"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12.5 4 6.5 10l6 6"/></svg></button>
+          <button class="round" id="next" type="button" aria-label="Pagina următoare"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7.5 4 6 6-6 6"/></svg></button>
+          <span class="hint">Folosiți săgețile tastaturii sau glisați</span>
+        </div>
+      </div>
+      <ol class="index" id="index"></ol>
+    </div>
+  </div>
+</section>
+
+<dialog class="lb" id="lb" aria-label="Imagine mărită">
+  <div class="lb-inner">
+    <button class="round lb-close" id="lbClose" type="button" aria-label="Închide"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 5 10 10M15 5 5 15"/></svg></button>
+    <img id="lbImg" alt="">
+  </div>
+  <p class="lb-cap" id="lbCap"></p>
+</dialog>
+
+<dialog class="pv" id="privacy" aria-labelledby="pvT">
+  <div class="pv-inner">
+    <button class="round pv-close" type="button" id="pvClose" aria-label="Închide nota de informare"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 5 10 10M15 5 5 15"/></svg></button>
+    <h2 id="pvT">Nota de informare privind datele personale</h2>
+    <p>Conform art. 13 din Regulamentul (UE) 2016/679 (GDPR).</p>
+
+    <h3>Cine prelucrează datele</h3>
+    <p>Dr. Alexandru Găitoane și Dr. Andrei Dăescu, în calitate de operatori. Contact pentru orice întrebare legată de datele dumneavoastră: <a href="mailto:flaviusalinrosu@gmail.com">flaviusalinrosu@gmail.com</a>.</p>
+
+    <h3>Ce date colectăm</h3>
+    <p>Numele și prenumele, adresa de e-mail și/sau numărul de telefon, specialitatea și tema proiectului, tipul de proiect, etapele pentru care solicitați asistență și, opțional, alte detalii pe care alegeți să ni le transmiteți.</p>
+
+    <h3>De ce și pe ce temei</h3>
+    <p>Folosim datele doar pentru a vă răspunde la cerere și pentru a discuta o posibilă colaborare. Temeiul legal este efectuarea de demersuri la cererea dumneavoastră înainte de încheierea unui contract (art. 6 alin. 1 lit. b GDPR). Nu folosim datele pentru marketing și nu le vindem.</p>
+
+    <h3>Cine mai primește datele</h3>
+    <ul>
+      <li>FormSubmit (formsubmit.co), serviciul care transmite formularul prin e-mail;</li>
+      <li>Google (Gmail), unde este primit și păstrat mesajul.</li>
+    </ul>
+    <p>Acești furnizori pot prelucra datele și în afara Spațiului Economic European.</p>
+
+    <h3>Cât timp le păstrăm</h3>
+    <p>Dacă nu ajungem la o colaborare, ștergem mesajul în cel mult 12 luni de la primire. Dacă lucrăm împreună, datele se păstrează pe durata colaborării și ulterior doar cât impune legea.</p>
+
+    <h3>Drepturile dumneavoastră</h3>
+    <p>Aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Pentru oricare dintre ele, scrieți-ne la adresa de mai sus. Aveți și dreptul de a depune o plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (<a href="https://www.dataprotection.ro" target="_blank" rel="noopener">dataprotection.ro</a>).</p>
+
+    <h3>Date despre pacienți</h3>
+    <p>Vă rugăm să nu transmiteți prin acest formular date despre pacienți sau alte date privind sănătatea unor persoane identificabile.</p>
+  </div>
+</dialog>
+
+<div class="wrap">
+  <section class="form-sec" id="formular" aria-labelledby="formT">
+    <div class="form-grid">
+      <div class="form-intro">
+        <h2 id="formT">Spuneți-ne despre proiectul dumneavoastră</h2>
+        <p>Completarea durează în jur de două minute. Vă contactăm pentru o discuție inițială, fără niciun angajament.</p>
+        <p class="mail">Răspunsurile ajung direct pe e-mail la Alexandru și Andrei.</p>
+      </div>
+
+      <div>
+      <form id="form" novalidate>
+        <p class="warn" role="note"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 2.5 18 17H2L10 2.5Z" stroke-linejoin="round"/><path d="M10 8v4M10 14.5v.5" stroke-linecap="round"/></svg><span>Vă rugăm să nu includeți date despre pacienți (nume, CNP, diagnostice sau alte informații care pot identifica o persoană). Descrieți doar proiectul.</span></p>
+        <div class="q" data-q="nume">
+          <label class="qt" for="nume">Nume și prenume <span class="req" aria-hidden="true">*</span></label>
+          <span class="help" id="numeH">&nbsp;</span>
+          <input type="text" id="nume" name="nume" autocomplete="name" required aria-describedby="numeE">
+          <span class="err" id="numeE">Scrieți numele și prenumele.</span>
+        </div>
+
+        <div class="q" data-q="contact">
+          <label class="qt" for="contact">La ce adresă de e-mail sau număr de telefon vă putem contacta? <span class="req" aria-hidden="true">*</span></label>
+          <span class="help" id="contactH">Puteți lăsa și ambele date de contact.</span>
+          <input type="text" id="contact" name="contact" autocomplete="email" placeholder="nume@exemplu.ro, 07xx xxx xxx" required aria-describedby="contactH contactE">
+          <span class="err" id="contactE">Lăsați o adresă de e-mail validă sau un număr de telefon.</span>
+        </div>
+
+        <div class="q" data-q="tema">
+          <label class="qt" for="tema">Care este specialitatea medicală și tema proiectului? <span class="req" aria-hidden="true">*</span></label>
+          <span class="help" id="temaH">De exemplu: cardiologie, factori asociați cu răspunsul la terapia de resincronizare cardiacă.</span>
+          <input type="text" id="tema" name="tema" required aria-describedby="temaH temaE">
+          <span class="err" id="temaE">Descrieți pe scurt specialitatea și tema.</span>
+        </div>
+
+        <fieldset class="q radio" data-q="tip">
+          <legend>Ce tip de proiect aveți în vedere? <span class="req" aria-hidden="true">*</span></legend>
+          <span class="help">Alegeți o singură opțiune.</span>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="tip" value="Articol științific independent"><span class="mark"></span>Articol științific independent</label>
+            <label class="opt"><input type="radio" name="tip" value="Unul sau mai multe articole pentru teza de doctorat"><span class="mark"></span>Unul sau mai multe articole pentru teza de doctorat</label>
+            <label class="opt"><input type="radio" name="tip" value="Mai multe articole în cadrul unui alt proiect de cercetare"><span class="mark"></span>Mai multe articole în cadrul unui alt proiect de cercetare</label>
+            <label class="opt"><input type="radio" name="tip" value="Alt tip de proiect"><span class="mark"></span>Alt tip de proiect</label>
+          </div>
+          <span class="err">Alegeți tipul de proiect.</span>
+        </fieldset>
+
+        <fieldset class="q check" data-q="etape">
+          <legend>Pentru ce etape aveți nevoie de asistență specializată? <span class="req" aria-hidden="true">*</span></legend>
+          <span class="help">Puteți selecta mai multe opțiuni.</span>
+          <div class="opts">
+            <label class="opt whole"><input type="checkbox" name="etape" value="Întregul proiect" data-exclusive><span class="mark"></span>Întregul proiect, de la planificarea studiului până la trimiterea manuscrisului spre publicare</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Formularea obiectivelor și proiectarea studiului"><span class="mark"></span>Formularea obiectivelor și proiectarea studiului</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Organizarea și verificarea bazei de date"><span class="mark"></span>Organizarea și verificarea bazei de date</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Analiză statistică, inclusiv tabele și figuri"><span class="mark"></span>Analiză statistică, inclusiv tabele și figuri</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Interpretarea rezultatelor"><span class="mark"></span>Interpretarea rezultatelor</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Redactarea sau revizuirea manuscrisului"><span class="mark"></span>Redactarea sau revizuirea manuscrisului</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Alegerea revistei și trimiterea manuscrisului"><span class="mark"></span>Alegerea revistei și trimiterea manuscrisului</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Aș dori să stabilim împreună" data-exclusive><span class="mark"></span>Aș dori să stabilim împreună</label>
+          </div>
+          <span class="err">Alegeți cel puțin o etapă.</span>
+        </fieldset>
+
+        <div class="q" data-q="detalii">
+          <label class="qt" for="detalii">Altceva ce ar trebui să știm?</label>
+          <span class="help">Opțional. Termene, stadiul datelor, revista vizată. Fără date despre pacienți.</span>
+          <textarea id="detalii" name="detalii"></textarea>
+        </div>
+
+        <div class="hp" aria-hidden="true"><label>Nu completați acest câmp <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+
+        <div class="actions">
+          <button class="btn" type="submit" id="send"><span class="spin" aria-hidden="true"></span><span class="lbl">Trimiteți formularul</span></button>
+          <p class="note">Folosim datele doar pentru a vă răspunde la cerere. Detalii în <button type="button" class="linkbtn" data-privacy>nota de informare privind datele personale</button>.</p>
+        </div>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Dr. Alexandru Găitoane și Dr. Andrei Dăescu</span>
+    <button type="button" class="linkbtn" data-privacy>Protecția datelor personale</button>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ===== Pornire de la începutul paginii la refresh ===== */
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  window.scrollTo(0, 0);
+  // linkurile interne derulează fără să adauge #ancora în adresă
+  document.addEventListener("click", function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute("href").slice(1);
+    e.preventDefault();
+    var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!id) { window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"}); return; }
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior: reduce ? "auto" : "smooth", block:"start"});
+  });
+
+  /* ===== Configurare ===== */
+  var RECIPIENT = "flaviusalinrosu@gmail.com";
+  var ENDPOINT  = "https://formsubmit.co/ajax/" + RECIPIENT;
+
+
+
+  /* ===== Galerie ===== */
+  var ARTICLES = [
+    {src:"__IMG1__", t:"AI at the Bedside of Psychiatry", d:"Meta-analiză comparativă a modelelor imagistice și non-imagistice. Journal of Clinical Medicine, MDPI.", alt:"Prima pagină a articolului AI at the Bedside of Psychiatry, publicat în Journal of Clinical Medicine"},
+    {src:"__IMG2__", t:"Meta-analiză cu efecte aleatorii", d:"Forest plot cu ajustare Hartung–Knapp, AUC pe scala logit și interval de predicție.", alt:"Forest plot dintr-o meta-analiză cu efecte aleatorii"},
+    {src:"__IMG3__", t:"Analiză de corelație", d:"Relația dintre scorurile FSFI și BESAQ, cu dreaptă de regresie și interval de încredere.", alt:"Grafic de dispersie FSFI total în funcție de BESAQ, r = -0,66"},
+    {src:"__IMG4__", t:"Clustere derivate prin PCA", d:"Profiluri de funcționare identificate prin analiza componentelor principale.", alt:"Grafic PCA cu două clustere și centroizii lor"},
+    {src:"__IMG5__", t:"Comparații între clustere", d:"Variabile clinice și psihosociale, cu interpretarea rezultatelor în text.", alt:"Tabelul 6, comparația variabilelor clinice între clustere"}
+  ];
+  var stage = document.getElementById("stage"), index = document.getElementById("index"),
+      counter = document.getElementById("counter"), cur = 0, sheets = [], items = [];
+
+  ARTICLES.forEach(function(a, i){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "sheet"; b.setAttribute("aria-label", "Mărește: " + a.t);
+    var img = document.createElement("img"); img.src = a.src; img.alt = a.alt; img.loading = i < 2 ? "eager" : "lazy";
+    b.appendChild(img); b.addEventListener("click", function(){ openLb(i); });
+    stage.appendChild(b); sheets.push(b);
+
+    var li = document.createElement("li"), ib = document.createElement("button");
+    ib.type = "button";
+    ib.innerHTML = '<span class="t"></span><span class="d"></span>';
+    ib.querySelector(".t").textContent = a.t; ib.querySelector(".d").textContent = a.d;
+    ib.addEventListener("click", function(){ go(i); });
+    li.appendChild(ib); index.appendChild(li); items.push(ib);
+  });
+
+  function go(n){
+    var N = ARTICLES.length;
+    cur = (n + N) % N;
+    sheets.forEach(function(s, i){
+      var p = (i - cur + N) % N;
+      s.dataset.pos = p < 3 ? String(p) : "hide";
+      s.tabIndex = p === 0 ? 0 : -1;
+      s.setAttribute("aria-hidden", p === 0 ? "false" : "true");
+    });
+    items.forEach(function(it, i){ it.setAttribute("aria-current", i === cur ? "true" : "false"); });
+    counter.textContent = (cur + 1) + " din " + N;
+    if (window.matchMedia("(max-width:920px)").matches) {
+      var li = items[cur].parentNode;
+      index.scrollTo({left: li.offsetLeft - index.offsetLeft, behavior: "smooth"});
+    }
+  }
+  document.getElementById("prev").addEventListener("click", function(){ go(cur - 1); });
+  document.getElementById("next").addEventListener("click", function(){ go(cur + 1); });
+  document.addEventListener("keydown", function(e){
+    if (lb.open) {
+      if (e.key === "ArrowRight") { go(cur + 1); fillLb(); }
+      if (e.key === "ArrowLeft")  { go(cur - 1); fillLb(); }
+      return;
+    }
+    var g = document.getElementById("articole").getBoundingClientRect();
+    var inView = g.top < innerHeight * .6 && g.bottom > innerHeight * .3;
+    if (!inView || /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+    if (e.key === "ArrowRight") go(cur + 1);
+    if (e.key === "ArrowLeft")  go(cur - 1);
+  });
+  var sx = null;
+  stage.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener("touchend", function(e){
+    if (sx === null) return;
+    var dx = e.changedTouches[0].clientX - sx; sx = null;
+    if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+  });
+
+  var lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+  function fillLb(){ var a = ARTICLES[cur]; lbImg.src = a.src; lbImg.alt = a.alt; lbCap.textContent = a.t; }
+  function openLb(i){
+    go(i); fillLb();
+    if (lb.showModal) lb.showModal(); else window.open(ARTICLES[i].src, "_blank");
+  }
+  document.getElementById("lbClose").addEventListener("click", function(){ lb.close(); });
+  lb.addEventListener("click", function(e){ if (e.target === lb) lb.close(); });
+  go(0);
+
+  /* ===== Nota de informare ===== */
+  var pv = document.getElementById("privacy");
+  document.addEventListener("click", function(e){
+    if (e.target.closest("[data-privacy]")) { if (pv.showModal) pv.showModal(); else pv.setAttribute("open",""); }
+  });
+  document.getElementById("pvClose").addEventListener("click", function(){ pv.close(); });
+  pv.addEventListener("click", function(e){ if (e.target === pv) pv.close(); });
+
+  /* ===== Formular ===== */
+  var form = document.getElementById("form"), send = document.getElementById("send"), status = document.getElementById("status");
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, PHONE = /(\+?\d[\d\s().-]{7,}\d)/;
+
+  // "Întregul proiect" și "Să stabilim împreună" exclud celelalte opțiuni
+  var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="etape"]'));
+  boxes.forEach(function(b){
+    b.addEventListener("change", function(){
+      if (!b.checked) return;
+      boxes.forEach(function(o){
+        if (o === b) return;
+        if (b.hasAttribute("data-exclusive") || o.hasAttribute("data-exclusive")) o.checked = false;
+      });
+    });
+  });
+
+  function vals(){
+    var fd = new FormData(form);
+    return {
+      nume: (fd.get("nume") || "").trim(),
+      contact: (fd.get("contact") || "").trim(),
+      tema: (fd.get("tema") || "").trim(),
+      tip: fd.get("tip") || "",
+      etape: fd.getAll("etape"),
+      detalii: (fd.get("detalii") || "").trim(),
+      honey: fd.get("_honey") || ""
+    };
+  }
+  function contactOk(c){
+    return c.split(/[,;\/]|\s{2,}/).some(function(p){ p = p.trim(); return EMAIL.test(p) || PHONE.test(p); }) || EMAIL.test(c) || PHONE.test(c);
+  }
+  function mark(name, bad){
+    var q = form.querySelector('[data-q="' + name + '"]');
+    q.classList.toggle("invalid", bad);
+    var inp = q.querySelector("input[type=text]");
+    if (inp) inp.setAttribute("aria-invalid", bad ? "true" : "false");
+    return bad;
+  }
+  function validate(v){
+    var bad = [];
+    if (mark("nume", v.nume.length < 3)) bad.push("nume");
+    if (mark("contact", !contactOk(v.contact))) bad.push("contact");
+    if (mark("tema", v.tema.length < 3)) bad.push("tema");
+    if (mark("tip", !v.tip)) bad.push("tip");
+    if (mark("etape", v.etape.length === 0)) bad.push("etape");
+    return bad;
+  }
+  form.addEventListener("input", function(e){
+    var q = e.target.closest(".q");
+    if (q && q.classList.contains("invalid")) validate(vals());
+  });
+  form.addEventListener("change", function(e){
+    var q = e.target.closest(".q");
+    if (q && q.classList.contains("invalid")) validate(vals());
+  });
+
+  function emailIn(c){ var m = c.match(/[^\s@,;]+@[^\s@,;]+\.[^\s@,;]{2,}/); return m ? m[0] : ""; }
+  function mailtoHref(v){
+    var body = [
+      "Nume și prenume: " + v.nume,
+      "Contact: " + v.contact,
+      "Specialitate și temă: " + v.tema,
+      "Tip de proiect: " + v.tip,
+      "Etape: " + v.etape.join("; "),
+      "Detalii: " + (v.detalii || "-")
+    ].join("\n");
+    return "mailto:" + RECIPIENT + "?subject=" + encodeURIComponent("Proiect nou: " + v.nume) + "&body=" + encodeURIComponent(body);
+  }
+  function setLoading(on){
+    send.disabled = on; send.classList.toggle("loading", on);
+    send.querySelector(".lbl").textContent = on ? "Se trimite…" : "Trimiteți formularul";
+  }
+  function showStatus(kind, html){ status.className = "status show " + kind; status.innerHTML = html; }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = vals();
+    if (v.honey) return;
+    var bad = validate(v);
+    if (bad.length){
+      var first = form.querySelector('[data-q="' + bad[0] + '"]');
+      first.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+      var f = first.querySelector("input"); if (f) f.focus({preventScroll:true});
+      return;
+    }
+    setLoading(true); status.className = "status";
+
+    var payload = {
+      "Nume și prenume": v.nume,
+      "Contact": v.contact,
+      "Specialitate și temă": v.tema,
+      "Tip de proiect": v.tip,
+      "Etape pentru care se cere asistență": v.etape.join("; "),
+      "Detalii suplimentare": v.detalii || "-",
+      "_subject": "Proiect nou: " + v.nume + " (" + v.tema.slice(0, 60) + ")",
+      "_template": "table",
+      "_captcha": "false"
+    };
+    var re = emailIn(v.contact); if (re) payload._replyto = re;
+
+    fetch(ENDPOINT, {
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body: JSON.stringify(payload)
+    })
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(res){
+      var success = res.ok && (res.j.success === true || res.j.success === "true");
+      if (!success) throw new Error(res.j.message || "Serviciul de e-mail nu a confirmat trimiterea.");
+      form.innerHTML =
+        '<div class="done" tabindex="-1"><h3>Mulțumim, ' + escapeHtml(v.nume.split(" ")[0]) + '.</h3>' +
+        '<p>Am primit detaliile proiectului. Vă contactăm în curând la ' + escapeHtml(v.contact) + '.</p>' +
+        '<a class="btn ghost" href="#articole">Înapoi la articole</a></div>';
+      form.querySelector(".done").focus();
+    })
+    .catch(function(err){
+      setLoading(false);
+      showStatus("bad",
+        "Formularul nu a putut fi trimis automat (" + escapeHtml(err.message || "eroare de rețea") + "). " +
+        'Răspunsurile dumneavoastră sunt păstrate. <a href="' + mailtoHref(v) + '">Trimiteți-le prin aplicația de e-mail</a> sau încercați din nou.');
+    });
+  });
+
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+})();
+</script>
+</body>
+</html>
