@@ -12,15 +12,14 @@ ROOT = Path(__file__).resolve().parent
 TEMPLATE = ROOT / "src" / "template.html"
 OUTPUT = ROOT / "index.html"
 FONTS_DIR = ROOT / "src" / "fonts"
-PREFIX = "WhatsApp Image 2026-11-13 at 13.10.42"
 
 # Ordinea corespunde array-ului ARTICLES din template (__IMG1__ ... __IMG5__).
 IMAGES = [
-    f"{PREFIX} (1).jpeg",  # 1. Prima pagină JCM – AI at the Bedside of Psychiatry
-    f"{PREFIX} (2).jpeg",  # 2. Forest plot – meta-analiză
-    f"{PREFIX}.jpeg",      # 3. Corelație FSFI–BESAQ
-    f"{PREFIX} (3).jpeg",  # 4. Clustere PCA
-    f"{PREFIX} (4).jpeg",  # 5. Tabelul 6 – comparații între clustere
+    "articol-jcm-ai-psihiatrie.jpeg",   # 1. Prima pagină JCM – AI at the Bedside of Psychiatry
+    "meta-analiza-forest-plot.jpeg",    # 2. Forest plot – meta-analiză
+    "corelatie-fsfi-besaq.jpeg",        # 3. Corelație FSFI–BESAQ
+    "clustere-pca.jpeg",                # 4. Clustere PCA
+    "tabel-comparatii-clustere.jpeg",   # 5. Tabelul 6 – comparații între clustere
 ]
 
 

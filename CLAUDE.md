@@ -31,7 +31,7 @@ index.html          # FIȘIER GENERAT – nu se editează manual
 src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/ și __IMG1__…__IMG5__
 src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
 build.py            # include fonturile și imaginile ca base64 → index.html
-docs/               # imaginile articolelor (WhatsApp Image …jpeg) + idee.docx
+docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.jpeg) + idee.docx
 .claude/settings.json        # hook Stop → urcare automată pe GitHub
 .claude/hooks/auto-push.sh   # scriptul hook-ului
 ```
