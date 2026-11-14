@@ -70,7 +70,7 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 3. **Despre noi** („Perspectiva clinicianului, rigoarea statisticianului”): text în stânga, în dreapta
    **explorator de metode** `.mx`: 4 file (Analize statistice, Diagnostic și predicție, Sinteza dovezilor,
    Inteligență artificială) cu derulare automată la 6 s (bară roșie), oprită la hover și după primul click;
-   fiecare filă are o mini-ilustrație SVG animată (bare + regresie, curbă ROC, forest plot, rețea neuronală),
+   fiecare filă are o mini-ilustrație SVG animată (bare + regresie, curbă ROC, selecția studiilor printr-o pâlnie → diamant, rețea neuronală),
    o frază și lista de metode. Intrarea secțiunii: IntersectionObserver adaugă `.anim` apoi `.in` pe `.about`.
 4. **Din articolele noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
    index lateral `.index`, lightbox `<dialog id="lb">`, săgeți tastatură + swipe).
