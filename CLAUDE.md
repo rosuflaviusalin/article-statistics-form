@@ -10,7 +10,6 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 
 - Repo: https://github.com/rosuflaviusalin/article-statistics-form (privat)
 - Sursa conținutului: [docs/idee.docx](docs/idee.docx) (prezentarea medicilor + întrebările formularului)
-- Cerințele inițiale: [prompt.txt](prompt.txt)
 
 ## Tehnologii
 
@@ -29,7 +28,6 @@ index.html          # FIȘIER GENERAT – nu se editează manual
 src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e __IMG1__…__IMG5__
 build.py            # înlocuiește placeholder-ele cu imaginile din docs/ → index.html
 docs/               # imaginile articolelor (WhatsApp Image …jpeg) + idee.docx
-prompt.txt          # brief-ul inițial
 .claude/settings.json        # hook Stop → urcare automată pe GitHub
 .claude/hooks/auto-push.sh   # scriptul hook-ului
 ```
