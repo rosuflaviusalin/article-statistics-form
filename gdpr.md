@@ -30,15 +30,6 @@ nu să-și dea acordul.
 - Nota noastră de informare spune deja că temeiul este art. 6(1)(b). O bifă „sunt de acord”
   ar contrazice-o.
 
-### Ce bifă se poate pune totuși (opțional)
-
-O bifă obligatorie de **confirmare că persoana a citit nota**, nu de consimțământ:
-
-> ☐ Am citit Nota de informare privind datele personale.
-
-Este o practică frecventă pe site-urile din România, nu contrazice temeiul legal și dovedește că
-persoana a avut nota la dispoziție. **Status: nu este implementată, se poate adăuga la cerere.**
-
 ### Termeni și condiții / „licence agreement”
 
 Nu sunt necesari pentru un formular de contact. Devin necesari doar dacă pe site se vând servicii

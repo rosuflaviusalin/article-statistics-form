@@ -99,7 +99,7 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 - **La lansare**: schimbă adresa de e-mail în `RECIPIENT` **și** în nota de informare, plus textul
   „Răspunsurile ajung direct pe e-mail la Alexandru și Andrei”.
 - Puncte rămase (neimplementate, la decizia utilizatorului): FormSubmit fără DPA
-  (alternativă: Google Apps Script), bifa „Am citit nota de informare”.
+  (alternativă: Google Apps Script). Fără bifă în formular: decizie luată (temei art. 6(1)(b), doar informare).
 
 ## Comportamente de reținut
 
