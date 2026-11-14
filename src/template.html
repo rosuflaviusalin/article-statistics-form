@@ -179,6 +179,15 @@ a{color:inherit}
 .round:hover{border-color:#fff;background:rgba(255,255,255,.06)}
 .round svg{width:18px;height:18px}
 .hint{font-size:.8125rem;color:#8A99AA;margin-left:8px}
+.g-progress{display:none;height:2px;background:#33435A;margin-top:20px;border-radius:2px;overflow:hidden}
+.g-progress span{display:block;height:100%;background:var(--signal);transform-origin:left;transform:scaleX(0)}
+/* galeria fixată pe ecran (doar desktop, cu GSAP ScrollTrigger) */
+.gallery.pinned{height:100vh;box-sizing:border-box;padding:clamp(24px,5vh,56px) 0;display:flex;align-items:center}
+.gallery.pinned > .wrap{width:100%}
+.gallery.pinned .section-head{margin-bottom:clamp(36px,6vh,52px)}
+.gallery.pinned .stage{max-height:calc(100vh - 330px)}
+.gallery.pinned .g-progress{display:block}
+.gallery.pinned .sheet{transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
 .index{list-style:none;margin:0;padding:0;border-top:1px solid #33435A}
 .index button{
   all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;
@@ -427,6 +436,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <button class="round" id="next" type="button" aria-label="Pagina următoare"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7.5 4 6 6-6 6"/></svg></button>
           <span class="hint">Folosiți săgețile tastaturii sau glisați</span>
         </div>
+        <div class="g-progress" aria-hidden="true"><span></span></div>
       </div>
       <ol class="index" id="index"></ol>
     </div>
@@ -561,6 +571,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </footer>
 
+<script>/*__VENDOR__*/</script>
 <script>
 (function(){
   /* ===== Pornire de la începutul paginii la refresh ===== */
@@ -607,7 +618,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     ib.type = "button";
     ib.innerHTML = '<span class="t"></span><span class="d"></span>';
     ib.querySelector(".t").textContent = a.t; ib.querySelector(".d").textContent = a.d;
-    ib.addEventListener("click", function(){ go(i); });
+    ib.addEventListener("click", function(){ nav(i); });
     li.appendChild(ib); index.appendChild(li); items.push(ib);
   });
 
@@ -627,8 +638,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       index.scrollTo({left: li.offsetLeft - index.offsetLeft, behavior: "smooth"});
     }
   }
-  document.getElementById("prev").addEventListener("click", function(){ go(cur - 1); });
-  document.getElementById("next").addEventListener("click", function(){ go(cur + 1); });
+  // În modul fixat, navigarea derulează pagina până la poziția articolului.
+  var pinST = null;
+  function nav(n){
+    if (!pinST) { go(n); return; }
+    var N = ARTICLES.length, i = Math.max(0, Math.min(N - 1, n));
+    var y = pinST.start + ((i + .5) / N) * (pinST.end - pinST.start);
+    window.scrollTo({top: y, behavior: "smooth"});
+  }
+  document.getElementById("prev").addEventListener("click", function(){ nav(cur - 1); });
+  document.getElementById("next").addEventListener("click", function(){ nav(cur + 1); });
   document.addEventListener("keydown", function(e){
     if (lb.open) {
       if (e.key === "ArrowRight") { go(cur + 1); fillLb(); }
@@ -638,8 +657,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     var g = document.getElementById("articole").getBoundingClientRect();
     var inView = g.top < innerHeight * .6 && g.bottom > innerHeight * .3;
     if (!inView || /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
-    if (e.key === "ArrowRight") go(cur + 1);
-    if (e.key === "ArrowLeft")  go(cur - 1);
+    if (e.key === "ArrowRight") nav(cur + 1);
+    if (e.key === "ArrowLeft")  nav(cur - 1);
   });
   var sx = null;
   stage.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; }, {passive:true});
@@ -658,6 +677,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   document.getElementById("lbClose").addEventListener("click", function(){ lb.close(); });
   lb.addEventListener("click", function(e){ if (e.target === lb) lb.close(); });
   go(0);
+
+  /* Galeria fixată pe ecran: pe desktop, derularea parcurge articolele (GSAP ScrollTrigger). */
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.matchMedia().add("(min-width: 921px) and (prefers-reduced-motion: no-preference)", function(){
+      var gal = document.getElementById("articole"), N = ARTICLES.length,
+          bar = gal.querySelector(".g-progress span"), hint = gal.querySelector(".hint"), oldHint = hint.textContent;
+      gal.classList.add("pinned");
+      hint.textContent = "Derulați pentru a parcurge articolele";
+      pinST = ScrollTrigger.create({
+        trigger: gal, start: "top top", end: "+=" + Math.round((N - 1) * innerHeight * .65),
+        pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function(self){
+          var i = Math.min(N - 1, Math.floor(self.progress * N));
+          if (i !== cur) go(i);
+          bar.style.transform = "scaleX(" + self.progress.toFixed(4) + ")";
+        }
+      });
+      return function(){ pinST = null; gal.classList.remove("pinned"); hint.textContent = oldHint; };
+    });
+  }
 
   /* ===== Secțiunea „Perspectiva clinicianului”: animație la intrarea în ecran ===== */
   (function(){
