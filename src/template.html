@@ -44,7 +44,7 @@ a{color:inherit}
 .top nav a:hover{color:var(--ink)}
 
 /* ---------- hero ---------- */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,72px);align-items:start;padding:clamp(32px,7vw,88px) 0 clamp(48px,8vw,104px)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,72px);align-items:center;padding:clamp(28px,5vw,56px) 0 clamp(48px,7vw,88px)}
 .hero h1{
   font:400 clamp(2.4rem,5.4vw,4.25rem)/1.04 var(--serif);
   letter-spacing:-.018em;margin:0 0 22px;text-wrap:balance;
@@ -62,8 +62,6 @@ a{color:inherit}
 .btn.ghost:hover{background:var(--ink);color:#fff}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
 
-.hero > div:first-child{position:sticky;top:40px;padding-top:clamp(0px,4vw,48px)}
-@media (max-width:920px){.hero > div:first-child{position:static;padding-top:0}}
 /* ---------- about ---------- */
 .about{border-top:1px solid var(--rule);padding:clamp(48px,7vw,88px) 0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px)}
 .about h2,.section-head h2,.form-intro h2{font:400 clamp(1.75rem,3.2vw,2.5rem)/1.12 var(--serif);letter-spacing:-.01em;margin:0}
@@ -71,30 +69,41 @@ a{color:inherit}
 .methods{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:8px}
 .methods li{font-size:.875rem;padding:6px 12px;border:1px solid var(--rule);border-radius:999px;background:rgba(255,255,255,.55)}
 
-/* ---------- cine ce face (în hero) ---------- */
-.roles{--you:#E0A23A;--us:var(--deep);margin:0;background:var(--sheet);border-radius:24px;border:1px solid var(--rule);box-shadow:0 40px 80px -48px rgba(22,51,79,.45);overflow:hidden}
-.roles-head{padding:clamp(18px,2.4vw,26px) clamp(18px,2.4vw,26px) 16px;border-bottom:1px solid #E1E7ED}
-.roles-head h2{font:400 1.5rem/1.15 var(--serif);margin:0 0 6px}
-.roles-head p{margin:0 0 14px;color:var(--ink-soft);font-size:.875rem;line-height:1.5}
-.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.8125rem;font-weight:500}
-.legend span{display:flex;align-items:center;gap:8px}
-.legend i{width:22px;height:8px;border-radius:99px;flex:none}
+/* ---------- aportul fiecărei părți (în hero, acordeon compact) ---------- */
+.roles{--you:#E0A23A;--us:var(--deep);--px:clamp(16px,2.2vw,24px);margin:0;background:var(--sheet);border-radius:22px;border:1px solid var(--rule);box-shadow:0 40px 80px -48px rgba(22,51,79,.45);overflow:hidden}
+.roles-head{padding:18px var(--px) 14px;border-bottom:1px solid #E1E7ED}
+.roles-head h2{font:400 1.375rem/1.15 var(--serif);margin:0 0 4px}
+.roles-head p{margin:0 0 12px;color:var(--ink-soft);font-size:.8125rem;line-height:1.45}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.78rem;font-weight:500}
+.legend span{display:flex;align-items:center;gap:7px}
+.legend i{width:20px;height:7px;border-radius:99px;flex:none}
 .legend .y i{background:var(--you)}.legend .u i{background:var(--us)}
 .r-list{list-style:none;margin:0;padding:0}
-.r-list li{display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:8px;padding:12px clamp(18px,2.4vw,26px);border-top:1px solid #EDF1F5}
+.r-list li{border-top:1px solid #EDF1F5}
 .r-list li:first-child{border-top:0}
-.r-list li > div{grid-column:1 / -1}
-.r-num{font:400 .9375rem/1.3 var(--serif);color:var(--ink-soft);font-variant-numeric:tabular-nums}
-.r-stage{font:500 1rem/1.3 var(--serif)}
-.r-bar{display:flex;gap:3px;height:8px;margin:8px 0 8px}
+.r-head{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:grid;grid-template-columns:18px minmax(0,1fr) minmax(90px,38%) 14px;align-items:center;gap:10px;padding:9px var(--px);transition:background .15s}
+.r-head:hover{background:#F5F8FA}
+.r-head:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
+.r-num{font:400 .875rem/1.2 var(--serif);color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.r-stage{font:500 .9375rem/1.25 var(--serif)}
+.r-bar{display:flex;gap:2px;height:7px}
 .r-bar .y{flex:0 0 var(--y);background:var(--you);border-radius:99px 0 0 99px}
 .r-bar .u{flex:1;background:var(--us);border-radius:0 99px 99px 0}
-.r-who{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:.78rem;line-height:1.4;color:var(--ink-soft)}
+.r-chev{width:14px;height:14px;color:var(--ink-soft);transition:transform .2s}
+.r-head[aria-expanded="true"] .r-chev{transform:rotate(180deg)}
+.r-head[aria-expanded="true"]{background:#F5F8FA}
+.r-who{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:.78rem;line-height:1.4;color:var(--ink-soft);padding:2px var(--px) 12px calc(var(--px) + 28px);background:#F5F8FA}
+.r-who[hidden]{display:none}
 .r-who p{margin:0;min-width:0}
 .r-who b{font-weight:600;color:var(--ink)}
 .r-who .yy b{color:#8A5A0B}
-.r-note{font-size:.75rem;color:var(--ink-soft);margin:0;padding:12px clamp(18px,2.4vw,26px) 16px;border-top:1px solid #E1E7ED;background:#F7F9FB}
-@media (max-width:420px){.r-who{grid-template-columns:1fr;gap:4px}}
+.r-note{font-size:.72rem;color:var(--ink-soft);margin:0;padding:10px var(--px) 12px;border-top:1px solid #E1E7ED;background:#F7F9FB}
+@media (prefers-reduced-motion: reduce){.r-chev{transition:none}}
+@media (max-width:460px){
+  .r-head{grid-template-columns:18px minmax(0,1fr) 14px;row-gap:6px}
+  .r-head .r-bar{grid-column:2 / 3;grid-row:2}
+  .r-who{grid-template-columns:1fr;gap:6px;padding-left:calc(var(--px) + 28px)}
+}
 
 /* ---------- gallery ---------- */
 .gallery{overflow:hidden;background:var(--ink);color:#E9EEF3;padding:clamp(56px,8vw,104px) 0}
@@ -263,74 +272,42 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="roles-head">
       <div>
         <h2 id="rolT">Aportul fiecărei părți</h2>
-        <p>Dumneavoastră aduceți expertiza clinică și datele. Noi ne ocupăm de metodă, statistică și drumul până la publicare.</p>
+        <p>Dumneavoastră aduceți expertiza clinică și datele. Noi ne ocupăm de metodă, statistică și drumul până la publicare. Apăsați pe o etapă pentru detalii.</p>
       </div>
       <div class="legend" aria-hidden="true"><span class="y"><i></i>Dumneavoastră</span><span class="u"><i></i>Noi, statisticienii</span></div>
     </div>
     <ol class="r-list">
         <li style="--y:70%">
-          <span class="r-num">1</span>
-          <span class="r-stage">Ideea și întrebarea de cercetare</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 70% dumneavoastră, 30% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Tema, întrebarea clinică și contextul ei.</p><p><b>Noi:</b> O transformăm într-o întrebare la care datele pot răspunde.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw1"><span class="r-num">1</span><span class="r-stage">Ideea și întrebarea de cercetare</span><span class="r-bar" role="img" aria-label="Aproximativ 70% dumneavoastră, 30% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw1" hidden><p class="yy"><b>Dumneavoastră:</b> Tema, întrebarea clinică și contextul ei.</p><p><b>Noi:</b> O transformăm într-o întrebare la care datele pot răspunde.</p></div>
         </li>
         <li style="--y:30%">
-          <span class="r-num">2</span>
-          <span class="r-stage">Obiectivele și designul studiului</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 30% dumneavoastră, 70% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Ce este fezabil în clinica dumneavoastră.</p><p><b>Noi:</b> Obiectivele, tipul de studiu și calculul eșantionului.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw2"><span class="r-num">2</span><span class="r-stage">Obiectivele și designul studiului</span><span class="r-bar" role="img" aria-label="Aproximativ 30% dumneavoastră, 70% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw2" hidden><p class="yy"><b>Dumneavoastră:</b> Ce este fezabil în clinica dumneavoastră.</p><p><b>Noi:</b> Obiectivele, tipul de studiu și calculul eșantionului.</p></div>
         </li>
         <li style="--y:85%">
-          <span class="r-num">3</span>
-          <span class="r-stage">Colectarea datelor</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 85% dumneavoastră, 15% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Recrutarea pacienților și culegerea datelor.</p><p><b>Noi:</b> Șablonul bazei de date și regulile de codare.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw3"><span class="r-num">3</span><span class="r-stage">Colectarea datelor</span><span class="r-bar" role="img" aria-label="Aproximativ 85% dumneavoastră, 15% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw3" hidden><p class="yy"><b>Dumneavoastră:</b> Recrutarea pacienților și culegerea datelor.</p><p><b>Noi:</b> Șablonul bazei de date și regulile de codare.</p></div>
         </li>
         <li style="--y:25%">
-          <span class="r-num">4</span>
-          <span class="r-stage">Organizarea bazei de date</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 25% dumneavoastră, 75% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Clarificări despre variabile.</p><p><b>Noi:</b> Curățarea, verificarea și codarea datelor.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw4"><span class="r-num">4</span><span class="r-stage">Organizarea bazei de date</span><span class="r-bar" role="img" aria-label="Aproximativ 25% dumneavoastră, 75% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw4" hidden><p class="yy"><b>Dumneavoastră:</b> Clarificări despre variabile.</p><p><b>Noi:</b> Curățarea, verificarea și codarea datelor.</p></div>
         </li>
         <li style="--y:8%">
-          <span class="r-num">5</span>
-          <span class="r-stage">Analiza statistică</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 8% dumneavoastră, 92% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Răspunsuri la întrebări punctuale.</p><p><b>Noi:</b> Analiza completă, cu tabele și figuri.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw5"><span class="r-num">5</span><span class="r-stage">Analiza statistică</span><span class="r-bar" role="img" aria-label="Aproximativ 8% dumneavoastră, 92% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw5" hidden><p class="yy"><b>Dumneavoastră:</b> Răspunsuri la întrebări punctuale.</p><p><b>Noi:</b> Analiza completă, cu tabele și figuri.</p></div>
         </li>
         <li style="--y:45%">
-          <span class="r-num">6</span>
-          <span class="r-stage">Interpretarea rezultatelor</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 45% dumneavoastră, 55% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Semnificația clinică a rezultatelor.</p><p><b>Noi:</b> Semnificația statistică și limitele studiului.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw6"><span class="r-num">6</span><span class="r-stage">Interpretarea rezultatelor</span><span class="r-bar" role="img" aria-label="Aproximativ 45% dumneavoastră, 55% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw6" hidden><p class="yy"><b>Dumneavoastră:</b> Semnificația clinică a rezultatelor.</p><p><b>Noi:</b> Semnificația statistică și limitele studiului.</p></div>
         </li>
         <li style="--y:35%">
-          <span class="r-num">7</span>
-          <span class="r-stage">Redactarea manuscrisului</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 35% dumneavoastră, 65% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Introducerea clinică și revizia finală.</p><p><b>Noi:</b> Metodologia, rezultatele și discuția.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw7"><span class="r-num">7</span><span class="r-stage">Redactarea manuscrisului</span><span class="r-bar" role="img" aria-label="Aproximativ 35% dumneavoastră, 65% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw7" hidden><p class="yy"><b>Dumneavoastră:</b> Introducerea clinică și revizia finală.</p><p><b>Noi:</b> Metodologia, rezultatele și discuția.</p></div>
         </li>
         <li style="--y:20%">
-          <span class="r-num">8</span>
-          <span class="r-stage">Alegerea revistei și trimiterea</span>
-          <div>
-            <div class="r-bar" role="img" aria-label="Aproximativ 20% dumneavoastră, 80% noi"><span class="y"></span><span class="u"></span></div>
-            <div class="r-who"><p class="yy"><b>Dumneavoastră:</b> Aprobarea revistei și a variantei finale.</p><p><b>Noi:</b> Selecția revistei, formatarea și răspunsul la recenzenți.</p></div>
-          </div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw8"><span class="r-num">8</span><span class="r-stage">Alegerea revistei și trimiterea</span><span class="r-bar" role="img" aria-label="Aproximativ 20% dumneavoastră, 80% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw8" hidden><p class="yy"><b>Dumneavoastră:</b> Aprobarea revistei și a variantei finale.</p><p><b>Noi:</b> Selecția revistei, formatarea și răspunsul la recenzenți.</p></div>
         </li>
     </ol>
     <p class="r-note">Proporțiile sunt orientative. Le stabilim împreună, în funcție de proiect.</p>
@@ -610,6 +587,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   document.getElementById("lbClose").addEventListener("click", function(){ lb.close(); });
   lb.addEventListener("click", function(e){ if (e.target === lb) lb.close(); });
   go(0);
+
+  /* ===== Aportul fiecărei părți: acordeon ===== */
+  var rHeads = Array.prototype.slice.call(document.querySelectorAll(".r-head"));
+  rHeads.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var open = btn.getAttribute("aria-expanded") === "true";
+      rHeads.forEach(function(o){
+        o.setAttribute("aria-expanded", "false");
+        document.getElementById(o.getAttribute("aria-controls")).hidden = true;
+      });
+      if (!open){
+        btn.setAttribute("aria-expanded", "true");
+        document.getElementById(btn.getAttribute("aria-controls")).hidden = false;
+      }
+    });
+  });
 
   /* ===== Nota de informare ===== */
   var pv = document.getElementById("privacy");

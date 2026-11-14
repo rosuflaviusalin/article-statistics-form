@@ -62,8 +62,9 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 1. **Header**: brand + meniu (Despre noi, Aportul fiecărei părți, Articole, Formular).
 2. **Hero**: titlul „Fiecare studiu are o poveste. O spunem cu cifre.”, sloganul
    „De la întrebarea de cercetare la articolul publicat.”, butoane. În dreapta, panoul
-   **„Aportul fiecărei părți”**: 8 etape, fiecare cu bară împărțită client (chihlimbar `#E0A23A`) /
-   statisticieni (bleumarin `--deep`). Proporția clientului e în `style="--y:NN%"` pe fiecare `<li>`.
+   **„Aportul fiecărei părți”**: acordeon compact cu 8 etape (un rând = număr, nume, bară împărțită
+   client chihlimbar `#E0A23A` / statisticieni bleumarin `--deep`); la click se deschide `.r-who` cu
+   textele „Dumneavoastră / Noi” (un singur rând deschis odată). Panoul trebuie să încapă lângă titlu, fără scroll. Proporția clientului e în `style="--y:NN%"` pe fiecare `<li>`.
    Proporțiile și textele sunt estimări, de validat cu medicii.
 3. **Despre noi**: textul din idee.docx + lista de metode (pastile).
 4. **Din articolele noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
