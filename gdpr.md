@@ -70,29 +70,7 @@ sau se încheie contracte online.
 
 ## Ce rămâne de decis (opțional)
 
-### 1. Fonturile Google: adresa IP a vizitatorului ajunge la Google
-
-**Ce se întâmplă:** pagina încarcă fonturile (Spectral și Instrument Sans) de pe serverele Google
-Fonts. La fiecare vizită, browserul vizitatorului se conectează la Google, care primește astfel
-**adresa IP** a vizitatorului. Adresa IP este dată cu caracter personal, iar vizitatorul nu a fost
-întrebat și nici informat despre asta.
-
-**De ce contează:** în 2022, un tribunal din München (LG München I, 3 O 17493/20) a decis că
-folosirea Google Fonts încărcate de la Google, fără acordul vizitatorului, încalcă GDPR, și a
-acordat despăgubiri. Riscul practic pentru un site mic este redus, dar problema e ușor de evitat.
-
-**Variante:**
-
-| Variantă | Ce înseamnă | Efect |
-|---|---|---|
-| **A. Fonturile incluse în pagină** (recomandat) | Fișierele de font se pun direct în `index.html`, ca și imaginile | Niciun contact cu Google, designul rămâne identic, pagina crește cu ~100–200 KB |
-| B. Fonturile sistemului | Se renunță la Spectral / Instrument Sans | Zero contact cu Google, dar aspectul se schimbă |
-| C. Lăsăm așa | Se menționează Google Fonts în nota de informare | Cel mai simplu, dar rămâne transferul de IP fără acord |
-
-**Recomandare:** varianta A. Se potrivește cu ideea de „un singur fișier” a proiectului și elimină
-problema complet. **Status: de decis.**
-
-### 2. FormSubmit fără contract de prelucrare (DPA)
+### 1. FormSubmit fără contract de prelucrare (DPA)
 
 **Ce se întâmplă:** FormSubmit este un serviciu gratuit care primește datele din formular și le
 trimite pe e-mail. Nu oferă un contract de prelucrare a datelor (DPA, art. 28 GDPR), iar datele
@@ -104,7 +82,7 @@ gratuit, datele ajung doar la Google, fără un intermediar în plus. Pagina se 
 **Recomandare:** acceptabil pentru început, dat fiind volumul mic; de reluat dacă volumul crește.
 **Status: de decis.**
 
-### 3. Gmail gratuit vs. Google Workspace
+### 2. Gmail gratuit vs. Google Workspace
 
 Pentru uz profesional, Google Workspace (cu plată) include un contract de prelucrare a datelor
 semnat de Google. Gmail gratuit nu. Pentru volumul actual este acceptabil, dar e bine de știut.
@@ -115,5 +93,4 @@ semnat de Google. Gmail gratuit nu. Pentru volumul actual este acceptabil, dar e
 - [ ] Aceeași adresă pusă și ca adresă de contact în nota de informare
 - [ ] Textul „Răspunsurile ajung direct pe e-mail la Alexandru și Andrei” este adevărat
 - [ ] Formularul activat în FormSubmit de pe domeniul final (e-mail de confirmare)
-- [ ] Decizie luată pentru fonturile Google (varianta A, B sau C)
 - [ ] Medicii știu de regula de ștergere în 12 luni și de răspunsul la cereri în maximum o lună

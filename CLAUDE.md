@@ -18,15 +18,19 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 - **Imaginile sunt incluse în HTML ca base64** (data URI), ca pagina să nu depindă de stocare externă.
 - **FormSubmit.co** (gratuit) trimite formularul pe e-mail prin `fetch()` POST JSON la
   `https://formsubmit.co/ajax/<email>`. Nu există backend propriu.
-- **Google Fonts**: Spectral (serif, titluri) și Instrument Sans (text).
+- **Fonturi locale**: Spectral (serif, titluri) și Instrument Sans (text), fișiere `.woff2` în
+  `src/fonts/`, incluse în pagină ca base64 de `build.py`. **Nu folosi Google Fonts** (link-uri la
+  fonts.googleapis.com / fonts.gstatic.com): ar trimite adresa IP a vizitatorilor la Google, problemă
+  GDPR (LG München I, 2022). `build.py` oprește build-ul dacă apare o astfel de referință.
 - **Python 3** doar pentru build (biblioteca standard, fără dependențe).
 
 ## Structura
 
 ```
 index.html          # FIȘIER GENERAT – nu se editează manual
-src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e __IMG1__…__IMG5__
-build.py            # înlocuiește placeholder-ele cu imaginile din docs/ → index.html
+src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/ și __IMG1__…__IMG5__
+src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
+build.py            # include fonturile și imaginile ca base64 → index.html
 docs/               # imaginile articolelor (WhatsApp Image …jpeg) + idee.docx
 .claude/settings.json        # hook Stop → urcare automată pe GitHub
 .claude/hooks/auto-push.sh   # scriptul hook-ului
@@ -40,7 +44,7 @@ docs/               # imaginile articolelor (WhatsApp Image …jpeg) + idee.docx
    `python3 -m http.server 8000` → http://localhost:8000/index.html
 4. Commit + push pe `develop` (vezi secțiunea Git).
 
-`index.html` are ~900 KB din cauza imaginilor base64: nu-l citi integral, lucrează pe template.
+`index.html` are ~1,2 MB din cauza imaginilor și fonturilor base64: nu-l citi integral, lucrează pe template.
 
 ## Git și urcarea automată
 
@@ -88,8 +92,8 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 - Avertisment vizibil: fără date despre pacienți.
 - **La lansare**: schimbă adresa de e-mail în `RECIPIENT` **și** în nota de informare, plus textul
   „Răspunsurile ajung direct pe e-mail la Alexandru și Andrei”.
-- Puncte rămase (neimplementate, la decizia utilizatorului): Google Fonts (IP trimis la Google),
-  FormSubmit fără DPA (alternativă: Google Apps Script).
+- Puncte rămase (neimplementate, la decizia utilizatorului): FormSubmit fără DPA
+  (alternativă: Google Apps Script), bifa „Am citit nota de informare”.
 
 ## Comportamente de reținut
 
