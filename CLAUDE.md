@@ -22,8 +22,6 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
   `src/fonts/`, incluse în pagină ca base64 de `build.py`. **Nu folosi Google Fonts** (link-uri la
   fonts.googleapis.com / fonts.gstatic.com): ar trimite adresa IP a vizitatorilor la Google, problemă
   GDPR (LG München I, 2022). `build.py` oprește build-ul dacă apare o astfel de referință.
-- **GSAP 3.12.5 + ScrollTrigger** (fișiere în `src/vendor/`, incluse în pagină de `build.py`, nu de pe CDN,
-  ca IP-ul vizitatorilor să nu ajungă la terți). Folosit doar pentru galeria fixată la scroll.
 - **Python 3** doar pentru build (biblioteca standard, fără dependențe). Fără React: decizie luată,
   găzduirea rămâne statică și gratuită.
 
@@ -33,7 +31,6 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 index.html          # FIȘIER GENERAT – nu se editează manual
 src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/ și __IMG1__…__IMG5__
 src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
-src/vendor/         # gsap.min.js, ScrollTrigger.min.js (placeholder /*__VENDOR__*/)
 build.py            # include fonturile și imaginile ca base64 → index.html
 docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.jpeg) + idee.docx
 .claude/settings.json        # hook Stop → urcare automată pe GitHub
@@ -71,13 +68,11 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
    textele „Dumneavoastră / Noi” (un singur rând deschis odată). Panoul trebuie să încapă lângă titlu, fără scroll. Proporția clientului e în `style="--y:NN%"` pe fiecare `<li>`.
    Proporțiile și textele sunt estimări, de validat cu medicii.
 3. **Despre noi** („Perspectiva clinicianului, rigoarea statisticianului”): text + diagramă Venn SVG
-   (Clinicianul / Statisticianul / „Noi” la intersecție) + metode grupate pe 4 categorii. O singură
+   (Clinicianul / Statisticianul / „Noi” la intersecție) + metode ca listă simplă în 4 coloane (fără pastile/chenare). O singură
    animație la intrarea în ecran (IntersectionObserver adaugă `.anim` apoi `.in` pe `.about`).
 4. **Din articolele noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
    index lateral `.index`, lightbox `<dialog id="lb">`, săgeți tastatură + swipe).
-   Datele imaginilor sunt în array-ul JS `ARTICLES`. Pe desktop (>920px, fără reduced-motion) secțiunea
-   se fixează pe ecran (ScrollTrigger, clasa `.pinned`) și derularea parcurge articolele, cu bară de
-   progres `.g-progress`; navigarea (`nav()`) derulează la poziția articolului. Pe mobil rămâne caruselul.
+   Datele imaginilor sunt în array-ul JS `ARTICLES`.
 5. **Formular**: cele 5 întrebări din idee.docx + câmp opțional „detalii”, honeypot `_honey`,
    avertisment să nu se trimită date despre pacienți.
 6. **Footer** + **nota de informare GDPR** (`<dialog id="privacy">`, deschisă de orice `[data-privacy]`).
@@ -116,7 +111,8 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 - Paletă rece „hârtie de laborator”: `--paper #EAEFF3`, `--ink #1A2533`, `--deep #16334F`,
   accent `--signal #C8322B` (roșul liniei de regresie din figurile lor).
 - Butonul principal `.btn` este albastru (`--deep`), cel secundar `.btn.ghost` are contur albastru.
-- Utilizatorul a respins: forest plot static rigid, grafice animate pe canvas, colaj de imagini în hero
+- Utilizatorul a respins: galeria fixată la scroll (GSAP, eliminată), lista de metode ca pastile pe rânduri
+  („prea mult pentru puțin”), forest plot static rigid, grafice animate pe canvas, colaj de imagini în hero
   și grafice abstracte greu de înțeles. Preferă lucruri **clare, statice, ușor de citit**.
 
 ## Publicare

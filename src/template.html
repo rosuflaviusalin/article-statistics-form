@@ -23,7 +23,6 @@
   --gutter:clamp(16px, 4vw, 56px);
 }
 *,*::before,*::after{box-sizing:border-box}
-/* Fără scroll-behavior:smooth în CSS: interferează cu GSAP ScrollTrigger. Derularea lină se face din JS. */
 body{
   margin:0;background:var(--paper);color:var(--ink);
   font:400 1.0625rem/1.6 var(--sans);
@@ -88,12 +87,10 @@ a{color:inherit}
 .v-txt-l{transition-delay:1s}.v-txt-r{transition-delay:1.1s}.v-txt-m{transition-delay:1.3s}
 
 /* metode grupate */
-.methods-wrap{margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--rule)}
-.m-row{display:grid;grid-template-columns:minmax(160px,.32fr) 1fr;gap:12px 32px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:start}
-.m-label{font:500 1.0625rem/1.3 var(--serif);padding-top:6px}
-.methods{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
-.methods li{font-size:.875rem;padding:7px 14px;border:1px solid var(--rule);border-radius:999px;background:rgba(255,255,255,.6);transition:background .2s,color .2s,border-color .2s,transform .2s;cursor:default}
-.methods li:hover{background:var(--deep);border-color:var(--deep);color:#fff;transform:translateY(-2px)}
+.methods-wrap{margin-top:clamp(40px,6vw,64px);padding-top:clamp(22px,3vw,30px);border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px clamp(20px,3vw,40px)}
+.m-group h3{font:600 .8125rem/1.3 var(--sans);color:var(--ink-soft);margin:0 0 10px;letter-spacing:.01em}
+.methods{list-style:none;padding:0;margin:0}
+.methods li{font:400 1.0625rem/1.45 var(--serif);padding:3px 0}
 
 /* animația de intrare (doar cu JS activ) */
 @media (prefers-reduced-motion: no-preference){
@@ -105,17 +102,16 @@ a{color:inherit}
   .about.anim .v-left .v-c{transform:translateX(-46px)}
   .about.anim .v-right .v-c{transform:translateX(46px)}
   .about.anim .v-int,.about.anim .v-txt{opacity:0}
-  .about.anim .methods li{opacity:0;transform:translateY(10px);transition:opacity .5s calc(.9s + var(--i) * 55ms),transform .5s calc(.9s + var(--i) * 55ms),background .2s,color .2s,border-color .2s}
-  .about.anim .m-label{opacity:0;transition:opacity .6s .8s}
+  .about.anim .methods li{opacity:0;transform:translateY(8px);transition:opacity .5s calc(.9s + var(--i) * 50ms),transform .5s calc(.9s + var(--i) * 50ms)}
+  .about.anim .m-group h3{opacity:0;transition:opacity .6s .8s}
   .about.in .ln > span{transform:none}
   .about.in .a-fade{opacity:1;transform:none}
   .about.in .v-left .v-c,.about.in .v-right .v-c{transform:none}
   .about.in .v-int,.about.in .v-txt{opacity:1}
   .about.in .methods li{opacity:1;transform:none}
-  .about.in .methods li:hover{transform:translateY(-2px);transition-delay:0s}
-  .about.in .m-label{opacity:1}
+  .about.in .m-group h3{opacity:1}
 }
-@media (max-width:760px){.m-row{grid-template-columns:1fr;gap:10px}.m-label{padding-top:0}}
+@media (max-width:760px){.methods-wrap{grid-template-columns:1fr 1fr}}
 
 /* ---------- aportul fiecărei părți (în hero, acordeon compact) ---------- */
 .roles{--you:#E0A23A;--us:var(--deep);--px:clamp(16px,2.2vw,24px);margin:0;background:var(--sheet);border-radius:22px;border:1px solid var(--rule);box-shadow:0 40px 80px -48px rgba(22,51,79,.45);overflow:hidden}
@@ -178,15 +174,6 @@ a{color:inherit}
 .round:hover{border-color:#fff;background:rgba(255,255,255,.06)}
 .round svg{width:18px;height:18px}
 .hint{font-size:.8125rem;color:#8A99AA;margin-left:8px}
-.g-progress{display:none;height:2px;background:#33435A;margin-top:20px;border-radius:2px;overflow:hidden}
-.g-progress span{display:block;height:100%;background:var(--signal);transform-origin:left;transform:scaleX(0)}
-/* galeria fixată pe ecran (doar desktop, cu GSAP ScrollTrigger) */
-.gallery.pinned{height:100vh;box-sizing:border-box;padding:clamp(24px,5vh,56px) 0;display:flex;align-items:center}
-.gallery.pinned > .wrap{width:100%}
-.gallery.pinned .section-head{margin-bottom:clamp(36px,6vh,52px)}
-.gallery.pinned .stage{max-height:calc(100vh - 330px)}
-.gallery.pinned .g-progress{display:block}
-.gallery.pinned .sheet{transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
 .index{list-style:none;margin:0;padding:0;border-top:1px solid #33435A}
 .index button{
   all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;
@@ -409,11 +396,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </figure>
     </div>
     <div class="methods-wrap" aria-label="Metode cu care lucrăm">
-      <div class="m-row"><span class="m-label">Planificare și analiză</span><ul class="methods" aria-label="Planificare și analiză"><li style="--i:0">Dimensionarea eșantionului</li><li style="--i:1">Statistică descriptivă</li><li style="--i:2">Comparații între grupuri</li><li style="--i:3">Regresie multivariabilă</li><li style="--i:4">Date longitudinale</li><li style="--i:5">Analiza supraviețuirii</li></ul></div>
-      <div class="m-row"><span class="m-label">Diagnostic și predicție</span><ul class="methods" aria-label="Diagnostic și predicție"><li style="--i:6">Acuratețe diagnostică</li><li style="--i:7">Performanță predictivă</li></ul></div>
-      <div class="m-row"><span class="m-label">Sinteza dovezilor</span><ul class="methods" aria-label="Sinteza dovezilor"><li style="--i:8">Revizuiri sistematice</li><li style="--i:9">Meta-analize</li></ul></div>
-      <div class="m-row"><span class="m-label">Inteligență artificială</span><ul class="methods" aria-label="Inteligență artificială"><li style="--i:10">Machine learning</li><li style="--i:11">Deep learning</li></ul></div>
-    </div>
+      <div class="m-group"><h3>Analize statistice</h3><ul class="methods"><li style="--i:0">Dimensionarea eșantionului</li><li style="--i:1">Statistică descriptivă</li><li style="--i:2">Comparații între grupuri</li><li style="--i:3">Regresie multivariabilă</li><li style="--i:4">Date longitudinale</li><li style="--i:5">Analiza supraviețuirii</li></ul></div>
+      <div class="m-group"><h3>Diagnostic și predicție</h3><ul class="methods"><li style="--i:6">Acuratețe diagnostică</li><li style="--i:7">Performanță predictivă</li></ul></div>
+      <div class="m-group"><h3>Sinteza dovezilor</h3><ul class="methods"><li style="--i:8">Revizuiri sistematice</li><li style="--i:9">Meta-analize</li></ul></div>
+      <div class="m-group"><h3>Inteligență artificială</h3><ul class="methods"><li style="--i:10">Machine learning</li><li style="--i:11">Deep learning</li></ul></div>
   </section>
 </div>
 
@@ -435,7 +421,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <button class="round" id="next" type="button" aria-label="Pagina următoare"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7.5 4 6 6-6 6"/></svg></button>
           <span class="hint">Folosiți săgețile tastaturii sau glisați</span>
         </div>
-        <div class="g-progress" aria-hidden="true"><span></span></div>
       </div>
       <ol class="index" id="index"></ol>
     </div>
@@ -570,7 +555,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </footer>
 
-<script>/*__VENDOR__*/</script>
 <script>
 (function(){
   /* ===== Pornire de la începutul paginii la refresh ===== */
@@ -617,7 +601,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     ib.type = "button";
     ib.innerHTML = '<span class="t"></span><span class="d"></span>';
     ib.querySelector(".t").textContent = a.t; ib.querySelector(".d").textContent = a.d;
-    ib.addEventListener("click", function(){ nav(i); });
+    ib.addEventListener("click", function(){ go(i); });
     li.appendChild(ib); index.appendChild(li); items.push(ib);
   });
 
@@ -637,16 +621,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       index.scrollTo({left: li.offsetLeft - index.offsetLeft, behavior: "smooth"});
     }
   }
-  // În modul fixat, navigarea derulează pagina până la poziția articolului.
-  var pinST = null;
-  function nav(n){
-    if (!pinST) { go(n); return; }
-    var N = ARTICLES.length, i = Math.max(0, Math.min(N - 1, n));
-    var y = pinST.start + ((i + .5) / N) * (pinST.end - pinST.start);
-    window.scrollTo({top: y, behavior: "smooth"});
-  }
-  document.getElementById("prev").addEventListener("click", function(){ nav(cur - 1); });
-  document.getElementById("next").addEventListener("click", function(){ nav(cur + 1); });
+  document.getElementById("prev").addEventListener("click", function(){ go(cur - 1); });
+  document.getElementById("next").addEventListener("click", function(){ go(cur + 1); });
   document.addEventListener("keydown", function(e){
     if (lb.open) {
       if (e.key === "ArrowRight") { go(cur + 1); fillLb(); }
@@ -656,8 +632,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     var g = document.getElementById("articole").getBoundingClientRect();
     var inView = g.top < innerHeight * .6 && g.bottom > innerHeight * .3;
     if (!inView || /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
-    if (e.key === "ArrowRight") nav(cur + 1);
-    if (e.key === "ArrowLeft")  nav(cur - 1);
+    if (e.key === "ArrowRight") go(cur + 1);
+    if (e.key === "ArrowLeft")  go(cur - 1);
   });
   var sx = null;
   stage.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; }, {passive:true});
@@ -676,27 +652,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   document.getElementById("lbClose").addEventListener("click", function(){ lb.close(); });
   lb.addEventListener("click", function(e){ if (e.target === lb) lb.close(); });
   go(0);
-
-  /* Galeria fixată pe ecran: pe desktop, derularea parcurge articolele (GSAP ScrollTrigger). */
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.matchMedia().add("(min-width: 921px) and (prefers-reduced-motion: no-preference)", function(){
-      var gal = document.getElementById("articole"), N = ARTICLES.length,
-          bar = gal.querySelector(".g-progress span"), hint = gal.querySelector(".hint"), oldHint = hint.textContent;
-      gal.classList.add("pinned");
-      hint.textContent = "Derulați pentru a parcurge articolele";
-      pinST = ScrollTrigger.create({
-        trigger: gal, start: "top top", end: "+=" + Math.round((N - 1) * innerHeight * .65),
-        pin: true, anticipatePin: 1, invalidateOnRefresh: true,
-        onUpdate: function(self){
-          var i = Math.min(N - 1, Math.floor(self.progress * N));
-          if (i !== cur) go(i);
-          bar.style.transform = "scaleX(" + self.progress.toFixed(4) + ")";
-        }
-      });
-      return function(){ pinST = null; gal.classList.remove("pinned"); hint.textContent = oldHint; };
-    });
-  }
 
   /* ===== Secțiunea „Perspectiva clinicianului”: animație la intrarea în ecran ===== */
   (function(){

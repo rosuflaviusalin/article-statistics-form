@@ -12,9 +12,6 @@ ROOT = Path(__file__).resolve().parent
 TEMPLATE = ROOT / "src" / "template.html"
 OUTPUT = ROOT / "index.html"
 FONTS_DIR = ROOT / "src" / "fonts"
-VENDOR_DIR = ROOT / "src" / "vendor"
-# Biblioteci JS incluse în pagină (nu de pe CDN, ca IP-ul vizitatorilor să nu ajungă la terți).
-VENDOR = ["gsap.min.js", "ScrollTrigger.min.js"]
 
 # Ordinea corespunde array-ului ARTICLES din template (__IMG1__ ... __IMG5__).
 IMAGES = [
@@ -42,12 +39,6 @@ def main() -> None:
     if "/*__FONTS__*/" not in html:
         raise SystemExit("Eroare: lipsește placeholder-ul /*__FONTS__*/ din template.")
     html = html.replace("/*__FONTS__*/", fonts_css())
-    if "/*__VENDOR__*/" not in html:
-        raise SystemExit("Eroare: lipsește placeholder-ul /*__VENDOR__*/ din template.")
-    vendor = "\n".join((VENDOR_DIR / f).read_text(encoding="utf-8") for f in VENDOR)
-    if "</script" in vendor:
-        raise SystemExit("Eroare: un fișier din src/vendor conține </script>.")
-    html = html.replace("/*__VENDOR__*/", vendor)
     for i, name in enumerate(IMAGES, 1):
         data = base64.b64encode((ROOT / "docs" / name).read_bytes()).decode()
         html = html.replace(f"__IMG{i}__", f"data:image/jpeg;base64,{data}")
