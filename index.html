@@ -155,8 +155,7 @@
   --gutter:clamp(16px, 4vw, 56px);
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+/* Fără scroll-behavior:smooth în CSS: interferează cu GSAP ScrollTrigger. Derularea lină se face din JS. */
 body{
   margin:0;background:var(--paper);color:var(--ink);
   font:400 1.0625rem/1.6 var(--sans);
