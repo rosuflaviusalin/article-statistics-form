@@ -81,6 +81,8 @@ docs/               # imaginile articolelor (WhatsApp Image …jpeg) + idee.docx
 
 ## GDPR (implementat)
 
+Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gdpr.md](gdpr.md).
+
 - Notă de informare art. 13: operatori = cei doi medici, contact = adresa din `RECIPIENT`,
   temei art. 6(1)(b), destinatari FormSubmit + Google, păstrare max. 12 luni, drepturi, ANSPDCP.
 - Avertisment vizibil: fără date despre pacienți.
