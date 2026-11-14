@@ -62,56 +62,80 @@ a{color:inherit}
 
 /* ---------- about: perspectiva clinicianului ---------- */
 .about{border-top:1px solid var(--rule);padding:clamp(56px,8vw,104px) 0}
-.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.about-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:center}
 .about h2,.section-head h2,.form-intro h2{font:400 clamp(1.75rem,3.2vw,2.5rem)/1.12 var(--serif);letter-spacing:-.01em;margin:0}
 .about h2{font-size:clamp(2rem,3.8vw,3rem);margin-bottom:24px;text-wrap:balance}
 .about h2 .ln{display:block;overflow:hidden;padding-bottom:.06em}
 .about h2 .ln > span{display:block}
 .about p{margin:0 0 1em;max-width:58ch;font-family:var(--serif);font-size:1.125rem;line-height:1.7}
 
-/* diagrama Venn */
-.venn{margin:0;width:100%;max-width:560px;justify-self:center}
-.venn svg{width:100%;height:auto;display:block;overflow:visible}
-.v-c{transition:transform 1.1s cubic-bezier(.2,.8,.2,1),fill .3s}
-.v-left .v-c{fill:rgba(42,127,184,.13);stroke:#2A7FB8;stroke-width:1.5}
-.v-right .v-c{fill:rgba(22,51,79,.10);stroke:var(--deep);stroke-width:1.5}
-.v-left:hover .v-c{fill:rgba(42,127,184,.22)}
-.v-right:hover .v-c{fill:rgba(22,51,79,.18)}
-.v-left,.v-right{cursor:default}
-.v-title{font:500 20px var(--serif);fill:var(--ink)}
-.v-item{font:400 14.5px var(--sans);fill:var(--ink-soft)}
-.v-int{fill:rgba(200,50,43,.16);transition:opacity .8s .75s}
-.v-mid{font:600 23px var(--serif);fill:var(--signal)}
-.v-mid-sub{font:400 13px var(--sans);fill:#7A2A25}
-.v-txt{transition:opacity .7s .9s}
-.v-txt-l{transition-delay:1s}.v-txt-r{transition-delay:1.1s}.v-txt-m{transition-delay:1.3s}
+/* explorator de metode (file cu derulare automată + ilustrații animate) */
+.mx{background:var(--sheet);border:1px solid var(--rule);border-radius:22px;box-shadow:0 40px 80px -48px rgba(22,51,79,.45);overflow:hidden}
+.mx-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid #E1E7ED}
+.mx-tab{all:unset;box-sizing:border-box;cursor:pointer;position:relative;padding:14px 10px 16px;font:500 .8125rem/1.3 var(--sans);color:var(--ink-soft);text-align:center;transition:color .2s,background .2s}
+.mx-tab + .mx-tab{border-left:1px solid #EDF1F5}
+.mx-tab:hover{color:var(--ink);background:#F7F9FB}
+.mx-tab[aria-selected="true"]{color:var(--deep);background:#F5F8FA}
+.mx-tab:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
+.mx-tab .bar{position:absolute;left:0;right:0;bottom:-1px;height:2px}
+.mx-tab .bar i{display:block;height:100%;width:0;background:var(--signal)}
+.mx-tab[aria-selected="true"] .bar i{width:100%}
+.mx.auto .mx-tab[aria-selected="true"] .bar i{width:0;animation:mxprog 6s linear forwards}
+.mx.auto:hover .bar i,.mx.auto:focus-within .bar i,.mx.paused .bar i{animation-play-state:paused}
+@keyframes mxprog{to{width:100%}}
+.mx-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(18px,3vw,32px);align-items:center;padding:clamp(20px,3vw,32px);min-height:260px}
+.mx-panel[hidden]{display:none}
+.mx-art svg{width:100%;height:auto;display:block;overflow:visible}
+.mx-panel h3{font:400 1.375rem/1.2 var(--serif);margin:0 0 8px}
+.about .mx-lead{font:400 .9375rem/1.55 var(--sans);color:var(--ink-soft);margin:0 0 14px;max-width:none}
+.mx-list{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.mx-list li{display:flex;gap:10px;align-items:baseline;font:400 1rem/1.4 var(--serif)}
+.mx-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal);flex:none;transform:translateY(-2px)}
+/* elementele ilustrațiilor */
+.ax{fill:none;stroke:#C7D0DA;stroke-width:1.5}
+.guide{fill:none;stroke:#C7D0DA;stroke-width:1.2;stroke-dasharray:4 4}
+.draw{fill:none;stroke-linecap:round;stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
+.grow{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0)}
+.pop{transform-box:fill-box;transform-origin:center;transform:scale(0)}
+.fade{opacity:0}
+.flow{fill:none;stroke:#2A7FB8;stroke-width:1.6;stroke-dasharray:5 11;opacity:0}
+.on .draw{animation:mxdraw 1.1s cubic-bezier(.3,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+.on .grow{animation:mxgrow .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+.on .pop{animation:mxpop .45s cubic-bezier(.2,.8,.3,1.3) forwards;animation-delay:var(--d,0s)}
+.on .fade{animation:mxfade .6s forwards;animation-delay:var(--d,0s)}
+.on .flow{animation:mxfade .4s 1.4s forwards,mxflow 1.2s 1.4s linear infinite}
+.on .mx-copy > *{animation:mxin .5s both}
+.on .mx-copy > :nth-child(2){animation-delay:.08s}
+.on .mx-copy > :nth-child(3){animation-delay:.16s}
+@keyframes mxdraw{to{stroke-dashoffset:0}}
+@keyframes mxgrow{to{transform:scaleY(1)}}
+@keyframes mxpop{to{transform:scale(1)}}
+@keyframes mxfade{to{opacity:1}}
+@keyframes mxflow{to{stroke-dashoffset:-32}}
+@keyframes mxin{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion: reduce){
+  .draw{stroke-dashoffset:0}.grow,.pop{transform:none}.fade,.flow{opacity:1}
+  .on .draw,.on .grow,.on .pop,.on .fade,.on .flow,.on .mx-copy > *{animation:none}
+}
 
-/* metode grupate */
-.methods-wrap{margin-top:clamp(40px,6vw,64px);padding-top:clamp(22px,3vw,30px);border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px clamp(20px,3vw,40px)}
-.m-group h3{font:600 .8125rem/1.3 var(--sans);color:var(--ink-soft);margin:0 0 10px;letter-spacing:.01em}
-.methods{list-style:none;padding:0;margin:0}
-.methods li{font:400 1.0625rem/1.45 var(--serif);padding:3px 0}
-
-/* animația de intrare (doar cu JS activ) */
+/* animația de intrare a secțiunii (doar cu JS activ) */
 @media (prefers-reduced-motion: no-preference){
   .about.anim .ln > span{transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
   .about.anim .ln:nth-child(2) > span{transition-delay:.12s}
   .about.anim .a-fade{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
   .about.anim .a-fade:nth-of-type(1){transition-delay:.3s}
   .about.anim .a-fade:nth-of-type(2){transition-delay:.42s}
-  .about.anim .v-left .v-c{transform:translateX(-46px)}
-  .about.anim .v-right .v-c{transform:translateX(46px)}
-  .about.anim .v-int,.about.anim .v-txt{opacity:0}
-  .about.anim .methods li{opacity:0;transform:translateY(8px);transition:opacity .5s calc(.9s + var(--i) * 50ms),transform .5s calc(.9s + var(--i) * 50ms)}
-  .about.anim .m-group h3{opacity:0;transition:opacity .6s .8s}
+  .about.anim .mx{opacity:0;transform:translateY(24px);transition:opacity .8s .2s,transform .8s .2s cubic-bezier(.2,.8,.2,1)}
   .about.in .ln > span{transform:none}
-  .about.in .a-fade{opacity:1;transform:none}
-  .about.in .v-left .v-c,.about.in .v-right .v-c{transform:none}
-  .about.in .v-int,.about.in .v-txt{opacity:1}
-  .about.in .methods li{opacity:1;transform:none}
-  .about.in .m-group h3{opacity:1}
+  .about.in .a-fade,.about.in .mx{opacity:1;transform:none}
 }
-@media (max-width:760px){.methods-wrap{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){
+  .mx-tabs{grid-template-columns:1fr 1fr}
+  .mx-tab:nth-child(3){border-left:0}
+  .mx-tab:nth-child(n+3){border-top:1px solid #EDF1F5}
+  .mx-panel{grid-template-columns:1fr;min-height:0}
+  .mx-art{max-width:300px}
+}
 
 /* ---------- aportul fiecărei părți (în hero, acordeon compact) ---------- */
 .roles{--you:#E0A23A;--us:var(--deep);--px:clamp(16px,2.2vw,24px);margin:0;background:var(--sheet);border-radius:22px;border:1px solid var(--rule);box-shadow:0 40px 80px -48px rgba(22,51,79,.45);overflow:hidden}
@@ -368,38 +392,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="a-fade">Suntem Alexandru Găitoane și Andrei Dăescu, medici specialiști psihiatri, cu specializare în cercetare clinică și statistică medicală și experiență în proiecte de cercetare și publicații științifice în mai multe specialități medicale.</p>
         <p class="a-fade">Vă însoțim de la formularea întrebării de cercetare până la interpretarea rezultatelor în context clinic, alegerea revistei și trimiterea spre publicare.</p>
       </div>
-      <figure class="venn" aria-label="Diagramă: perspectiva clinicianului și rigoarea statisticianului se suprapun în ceea ce oferim noi">
-        <svg viewBox="0 0 540 380" role="img" aria-labelledby="vennT">
-          <title id="vennT">Clinicianul: întrebarea clinică, relevanța practică, contextul clinic. Statisticianul: designul studiului, analiza statistică, rezultate robuste. La intersecție: noi, ambele perspective.</title>
-          <defs><clipPath id="vClip"><circle cx="190" cy="190" r="150"/></clipPath></defs>
-          <g class="v-left"><circle class="v-c" cx="190" cy="190" r="150"/></g>
-          <g class="v-right"><circle class="v-c" cx="350" cy="190" r="150"/></g>
-          <circle class="v-int" cx="350" cy="190" r="150" clip-path="url(#vClip)"/>
-          <g class="v-txt v-txt-l">
-            <text class="v-title" x="116" y="146" text-anchor="middle">Clinicianul</text>
-            <text class="v-item" x="116" y="180" text-anchor="middle">Întrebarea clinică</text>
-            <text class="v-item" x="116" y="204" text-anchor="middle">Relevanța practică</text>
-            <text class="v-item" x="116" y="228" text-anchor="middle">Contextul clinic</text>
-          </g>
-          <g class="v-txt v-txt-r">
-            <text class="v-title" x="424" y="146" text-anchor="middle">Statisticianul</text>
-            <text class="v-item" x="424" y="180" text-anchor="middle">Designul studiului</text>
-            <text class="v-item" x="424" y="204" text-anchor="middle">Analiza statistică</text>
-            <text class="v-item" x="424" y="228" text-anchor="middle">Rezultate robuste</text>
-          </g>
-          <g class="v-txt v-txt-m">
-            <text class="v-mid" x="270" y="186" text-anchor="middle">Noi</text>
-            <text class="v-mid-sub" x="270" y="210" text-anchor="middle">ambele</text>
-            <text class="v-mid-sub" x="270" y="227" text-anchor="middle">perspective</text>
-          </g>
-        </svg>
-      </figure>
+      <div class="mx" aria-label="Metode cu care lucrăm">
+        <div class="mx-tabs" role="tablist" aria-label="Categorii de metode"><button class="mx-tab" type="button" role="tab" id="mx-t1" aria-controls="mx-p1" aria-selected="true" tabindex="0">Analize statistice<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t2" aria-controls="mx-p2" aria-selected="false" tabindex="-1">Diagnostic și predicție<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t3" aria-controls="mx-p3" aria-selected="false" tabindex="-1">Sinteza dovezilor<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t4" aria-controls="mx-p4" aria-selected="false" tabindex="-1">Inteligență artificială<span class="bar" aria-hidden="true"><i></i></span></button></div>
+        <div class="mx-panel on" role="tabpanel" id="mx-p1" aria-labelledby="mx-t1">
+          <div class="mx-art"><svg viewBox="0 0 240 160" role="img" aria-label="Grafic cu bare și dreaptă de regresie"><path class="ax" d="M24 10V146H230"/><rect class="grow" style="--d:0.00s" x="40" y="96" width="24" height="50" rx="3" fill="#16334F" opacity=".85"/><rect class="grow" style="--d:0.08s" x="76" y="66" width="24" height="80" rx="3" fill="#2A7FB8" opacity=".85"/><rect class="grow" style="--d:0.16s" x="112" y="82" width="24" height="64" rx="3" fill="#16334F" opacity=".85"/><rect class="grow" style="--d:0.24s" x="148" y="48" width="24" height="98" rx="3" fill="#2A7FB8" opacity=".85"/><rect class="grow" style="--d:0.32s" x="184" y="30" width="24" height="116" rx="3" fill="#16334F" opacity=".85"/><path class="draw" style="--l:200;--d:.7s" d="M34 118 L222 32" stroke="#C8322B" stroke-width="2.6"/></svg></div>
+          <div class="mx-copy"><h3>Analize statistice</h3><p class="mx-lead">Descriem datele, comparăm grupuri și identificăm factorii asociați cu rezultatul urmărit.</p><ul class="mx-list"><li>Dimensionarea eșantionului</li><li>Statistică descriptivă</li><li>Comparații între grupuri</li><li>Regresie multivariabilă</li><li>Date longitudinale</li><li>Analiza supraviețuirii</li></ul></div>
+        </div>
+        <div class="mx-panel" role="tabpanel" id="mx-p2" aria-labelledby="mx-t2" hidden>
+          <div class="mx-art"><svg viewBox="0 0 240 160" role="img" aria-label="Curbă ROC cu aria de sub curbă"><path class="ax" d="M24 10V146H230"/><path class="guide" d="M24 146 L230 10"/><path class="fade" style="--d:1s" d="M24 146 C34 58 92 24 230 14 L230 146 Z" fill="rgba(42,127,184,.14)"/><path class="draw" style="--l:320;--d:.1s" d="M24 146 C34 58 92 24 230 14" stroke="#2A7FB8" stroke-width="3"/><text class="fade" style="--d:1.2s" x="150" y="112" font-family="Spectral, serif" font-size="20" fill="#16334F">AUC</text></svg></div>
+          <div class="mx-copy"><h3>Diagnostic și predicție</h3><p class="mx-lead">Arătăm cât de bine identifică un test sau un model pacienții care au boala.</p><ul class="mx-list"><li>Acuratețe diagnostică</li><li>Performanță predictivă</li></ul></div>
+        </div>
+        <div class="mx-panel" role="tabpanel" id="mx-p3" aria-labelledby="mx-t3" hidden>
+          <div class="mx-art"><svg viewBox="0 0 240 160" role="img" aria-label="Forest plot cu estimarea combinată"><path class="guide" d="M120 10V128"/><path class="draw" style="--l:84;--d:0.00s" d="M86 26H170" stroke="#1A2533" stroke-width="1.6"/><rect class="pop" style="--d:0.35s" x="123.0" y="21.0" width="10" height="10" fill="#4C5A6B"/><path class="draw" style="--l:60;--d:0.12s" d="M100 52H160" stroke="#1A2533" stroke-width="1.6"/><rect class="pop" style="--d:0.47s" x="125.0" y="45.0" width="14" height="14" fill="#4C5A6B"/><path class="draw" style="--l:80;--d:0.24s" d="M70 78H150" stroke="#1A2533" stroke-width="1.6"/><rect class="pop" style="--d:0.59s" x="108.0" y="74.0" width="8" height="8" fill="#4C5A6B"/><path class="draw" style="--l:74;--d:0.36s" d="M108 104H182" stroke="#1A2533" stroke-width="1.6"/><rect class="pop" style="--d:0.71s" x="136.0" y="98.0" width="12" height="12" fill="#4C5A6B"/><path class="fade" style="--d:.8s" d="M24 124H230" stroke="#E1E7ED" stroke-width="1.2"/><polygon class="pop" style="--d:1.1s" points="104,142 134,132 164,142 134,152" fill="#C8322B"/></svg></div>
+          <div class="mx-copy"><h3>Sinteza dovezilor</h3><p class="mx-lead">Combinăm rezultatele mai multor studii într-o concluzie solidă.</p><ul class="mx-list"><li>Revizuiri sistematice</li><li>Meta-analize</li></ul></div>
+        </div>
+        <div class="mx-panel" role="tabpanel" id="mx-p4" aria-labelledby="mx-t4" hidden>
+          <div class="mx-art"><svg viewBox="0 0 240 160" role="img" aria-label="Rețea neuronală"><path class="draw" style="--l:90;--d:0.00s" d="M40 40L120 28" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.03s" d="M40 40L120 66" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.06s" d="M40 40L120 104" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.09s" d="M40 40L120 142" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.12s" d="M40 85L120 28" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.15s" d="M40 85L120 66" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.18s" d="M40 85L120 104" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.21s" d="M40 85L120 142" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.24s" d="M40 130L120 28" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.27s" d="M40 130L120 66" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.30s" d="M40 130L120 104" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.33s" d="M40 130L120 142" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.36s" d="M120 28L200 62" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.39s" d="M120 28L200 108" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.42s" d="M120 66L200 62" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.45s" d="M120 66L200 108" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.48s" d="M120 104L200 62" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.51s" d="M120 104L200 108" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.54s" d="M120 142L200 62" stroke="#C7D0DA" stroke-width="1.2"/><path class="draw" style="--l:90;--d:0.57s" d="M120 142L200 108" stroke="#C7D0DA" stroke-width="1.2"/><path class="flow" d="M40 85L120 66L200 62"/><path class="flow" d="M40 40L120 104L200 108"/><circle class="pop" style="--d:0.50s" cx="40" cy="40" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.55s" cx="40" cy="85" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.60s" cx="40" cy="130" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.65s" cx="120" cy="28" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.70s" cx="120" cy="66" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.75s" cx="120" cy="104" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.80s" cx="120" cy="142" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/><circle class="pop" style="--d:0.85s" cx="200" cy="62" r="9" fill="#C8322B" stroke="#C8322B" stroke-width="2"/><circle class="pop" style="--d:0.90s" cx="200" cy="108" r="9" fill="#fff" stroke="#16334F" stroke-width="2"/></svg></div>
+          <div class="mx-copy"><h3>Inteligență artificială</h3><p class="mx-lead">Construim modele care învață din date, pentru predicție și clasificare.</p><ul class="mx-list"><li>Machine learning</li><li>Deep learning</li></ul></div>
+        </div>
+      </div>
     </div>
-    <div class="methods-wrap" aria-label="Metode cu care lucrăm">
-      <div class="m-group"><h3>Analize statistice</h3><ul class="methods"><li style="--i:0">Dimensionarea eșantionului</li><li style="--i:1">Statistică descriptivă</li><li style="--i:2">Comparații între grupuri</li><li style="--i:3">Regresie multivariabilă</li><li style="--i:4">Date longitudinale</li><li style="--i:5">Analiza supraviețuirii</li></ul></div>
-      <div class="m-group"><h3>Diagnostic și predicție</h3><ul class="methods"><li style="--i:6">Acuratețe diagnostică</li><li style="--i:7">Performanță predictivă</li></ul></div>
-      <div class="m-group"><h3>Sinteza dovezilor</h3><ul class="methods"><li style="--i:8">Revizuiri sistematice</li><li style="--i:9">Meta-analize</li></ul></div>
-      <div class="m-group"><h3>Inteligență artificială</h3><ul class="methods"><li style="--i:10">Machine learning</li><li style="--i:11">Deep learning</li></ul></div>
   </section>
 </div>
 
@@ -662,6 +674,42 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       if (en[0].isIntersecting){ sec.classList.add("in"); io.disconnect(); }
     }, {threshold: .2});
     io.observe(sec);
+  })();
+
+  /* ===== Explorator de metode: file cu derulare automată ===== */
+  (function(){
+    var mx = document.querySelector(".mx"); if (!mx) return;
+    var tabs = Array.prototype.slice.call(mx.querySelectorAll(".mx-tab")),
+        panels = Array.prototype.slice.call(mx.querySelectorAll(".mx-panel")),
+        cur = 0, auto = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function show(i, focus){
+      cur = i;
+      tabs.forEach(function(t, k){ t.setAttribute("aria-selected", k === i ? "true" : "false"); t.tabIndex = k === i ? 0 : -1; });
+      panels.forEach(function(p, k){ p.hidden = k !== i; p.classList.remove("on"); });
+      void panels[i].offsetWidth;            // repornește animațiile ilustrației
+      panels[i].classList.add("on");
+      if (focus) tabs[i].focus();
+    }
+    function stopAuto(){ auto = false; mx.classList.remove("auto"); }
+    tabs.forEach(function(t, i){
+      t.addEventListener("click", function(){ stopAuto(); show(i); });
+      t.querySelector(".bar i").addEventListener("animationend", function(){ if (auto) show((i + 1) % tabs.length); });
+    });
+    mx.querySelector(".mx-tabs").addEventListener("keydown", function(e){
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault(); stopAuto(); show((cur + d + tabs.length) % tabs.length, true);
+    });
+    if (auto) mx.classList.add("auto", "paused");
+    // pornește (și repornește animația) doar când exploratorul e vizibil
+    if ("IntersectionObserver" in window){
+      var first = true;
+      new IntersectionObserver(function(en){
+        var vis = en[0].isIntersecting;
+        mx.classList.toggle("paused", !vis);
+        if (vis && first){ first = false; show(cur); }
+      }, {threshold: .35}).observe(mx);
+    } else { mx.classList.remove("paused"); }
   })();
 
   /* ===== Aportul fiecărei părți: acordeon ===== */

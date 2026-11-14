@@ -67,9 +67,11 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
    client chihlimbar `#E0A23A` / statisticieni bleumarin `--deep`); la click se deschide `.r-who` cu
    textele „Dumneavoastră / Noi” (un singur rând deschis odată). Panoul trebuie să încapă lângă titlu, fără scroll. Proporția clientului e în `style="--y:NN%"` pe fiecare `<li>`.
    Proporțiile și textele sunt estimări, de validat cu medicii.
-3. **Despre noi** („Perspectiva clinicianului, rigoarea statisticianului”): text + diagramă Venn SVG
-   (Clinicianul / Statisticianul / „Noi” la intersecție) + metode ca listă simplă în 4 coloane (fără pastile/chenare). O singură
-   animație la intrarea în ecran (IntersectionObserver adaugă `.anim` apoi `.in` pe `.about`).
+3. **Despre noi** („Perspectiva clinicianului, rigoarea statisticianului”): text în stânga, în dreapta
+   **explorator de metode** `.mx`: 4 file (Analize statistice, Diagnostic și predicție, Sinteza dovezilor,
+   Inteligență artificială) cu derulare automată la 6 s (bară roșie), oprită la hover și după primul click;
+   fiecare filă are o mini-ilustrație SVG animată (bare + regresie, curbă ROC, forest plot, rețea neuronală),
+   o frază și lista de metode. Intrarea secțiunii: IntersectionObserver adaugă `.anim` apoi `.in` pe `.about`.
 4. **Din articolele noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
    index lateral `.index`, lightbox `<dialog id="lb">`, săgeți tastatură + swipe).
    Datele imaginilor sunt în array-ul JS `ARTICLES`.
@@ -111,8 +113,8 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 - Paletă rece „hârtie de laborator”: `--paper #EAEFF3`, `--ink #1A2533`, `--deep #16334F`,
   accent `--signal #C8322B` (roșul liniei de regresie din figurile lor).
 - Butonul principal `.btn` este albastru (`--deep`), cel secundar `.btn.ghost` are contur albastru.
-- Utilizatorul a respins: galeria fixată la scroll (GSAP, eliminată), lista de metode ca pastile pe rânduri
-  („prea mult pentru puțin”), forest plot static rigid, grafice animate pe canvas, colaj de imagini în hero
+- Utilizatorul a respins: diagrama Venn clinician/statistician, galeria fixată la scroll (GSAP, eliminată),
+  lista de metode ca pastile pe rânduri sau ca listă simplă în coloane („prea mult pentru puțin”), forest plot static rigid, grafice animate pe canvas, colaj de imagini în hero
   și grafice abstracte greu de înțeles. Preferă lucruri **clare, statice, ușor de citit**.
 
 ## Publicare
