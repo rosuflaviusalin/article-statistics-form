@@ -4,7 +4,7 @@ Ghid pentru Claude (și pentru oricine lucrează pe proiect). Răspunsurile căt
 
 ## Ce este proiectul
 
-O pagină web de tip landing + formular pentru **Dr. Alexandru Găitoane și Dr. Andrei Dăescu**,
+O pagină web de tip landing + formular pentru **A2 Statistical Analysis** (Dr. Alexandru Găitoane și Dr. Andrei Dăescu),
 medici psihiatri specializați în cercetare clinică și statistică medicală. Clienții (alți medici,
 doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat pe e-mail.
 
@@ -29,7 +29,8 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 
 ```
 index.html          # FIȘIER GENERAT – nu se editează manual
-src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/ și __IMG1__…__IMG5__
+src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/, __LOGO__ și __IMG1__…__IMG5__
+src/img/logo.jpg    # logo decupat/micșorat din docs/logo.jpeg (afișat cu mix-blend-mode:multiply)
 src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
 build.py            # include fonturile și imaginile ca base64 → index.html
 docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.jpeg) + idee.docx
@@ -60,7 +61,8 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 
 ## Secțiunile paginii (în ordine)
 
-1. **Header**: brand + meniu (Despre noi, Aportul fiecărei părți, Articole, Formular).
+1. **Header**: logo A2 Statistical Analysis + meniu (Despre noi, Aportul fiecărei părți, Exemple, Formular).
+   Numele de brand afișat peste tot este „A2 Statistical Analysis” (nu „Găitoane & Dăescu”).
 2. **Hero**: titlul „Fiecare studiu are o poveste. O spunem cu cifre.”, sloganul
    „De la întrebarea de cercetare la articolul publicat.”, butoane. În dreapta, panoul
    **„Aportul fiecărei părți”**: acordeon compact cu 8 etape (un rând = număr, nume, bară împărțită
@@ -72,7 +74,7 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
    Inteligență artificială) cu derulare automată la 6 s (bară roșie), oprită la hover și după primul click;
    fiecare filă are o mini-ilustrație SVG animată (bare + regresie, curbă ROC, selecția studiilor printr-o pâlnie → diamant, rețea neuronală),
    o frază și lista de metode. Intrarea secțiunii: IntersectionObserver adaugă `.anim` apoi `.in` pe `.about`.
-4. **Din articolele noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
+4. **Exemple din publicațiile noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
    index lateral `.index`, lightbox `<dialog id="lb">`, săgeți tastatură + swipe).
    Datele imaginilor sunt în array-ul JS `ARTICLES`.
 5. **Formular**: cele 5 întrebări din idee.docx + câmp opțional „detalii”, honeypot `_honey`,
@@ -81,7 +83,8 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 
 ## Formularul și e-mailul
 
-- Configurare în JS: `RECIPIENT` (acum `flaviusalinrosu@gmail.com`) și `ENDPOINT`.
+- Configurare în JS: `RECIPIENT` (`a2statisticalanalysis@gmail.com`) și `ENDPOINT`.
+- După trimitere: „Mulțumim, <prenume>.” (funcția `prenume()`: tot ce urmează după primul cuvânt din „Nume și prenume”).
 - Validare client: nume, contact (e-mail sau telefon), temă, tip proiect (radio), cel puțin o etapă.
   „Întregul proiect” și „Aș dori să stabilim împreună” sunt exclusive (`data-exclusive`).
 - Payload: chei în română + `_subject`, `_template: "table"`, `_captcha: "false"`, `_replyto`.
@@ -96,8 +99,7 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 - Notă de informare art. 13: operatori = cei doi medici, contact = adresa din `RECIPIENT`,
   temei art. 6(1)(b), destinatari FormSubmit + Google, păstrare max. 12 luni, drepturi, ANSPDCP.
 - Avertisment vizibil: fără date despre pacienți.
-- **La lansare**: schimbă adresa de e-mail în `RECIPIENT` **și** în nota de informare, plus textul
-  „Răspunsurile ajung direct pe e-mail la Alexandru și Andrei”.
+- Adresa de contact din notă = `RECIPIENT` = a2statisticalanalysis@gmail.com (de păstrat sincronizate).
 - Puncte rămase (neimplementate, la decizia utilizatorului): FormSubmit fără DPA
   (alternativă: Google Apps Script). Fără bifă în formular: decizie luată (temei art. 6(1)(b), doar informare).
 

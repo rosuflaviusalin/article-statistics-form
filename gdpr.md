@@ -80,8 +80,9 @@ semnat de Google. Gmail gratuit nu. Pentru volumul actual este acceptabil, dar e
 
 ## Lista de verificat înainte de lansare
 
-- [ ] Adresa de e-mail din cod (variabila `RECIPIENT` din `src/template.html`) schimbată cu cea a medicilor
-- [ ] Aceeași adresă pusă și ca adresă de contact în nota de informare
-- [ ] Textul „Răspunsurile ajung direct pe e-mail la Alexandru și Andrei” este adevărat
-- [ ] Formularul activat în FormSubmit de pe domeniul final (e-mail de confirmare)
+- [x] Adresa de e-mail din cod (`RECIPIENT`) este cea a medicilor: a2statisticalanalysis@gmail.com
+- [x] Aceeași adresă este adresa de contact din nota de informare
+- [x] Textul „Răspunsurile ajung direct pe e-mail la Alexandru și Andrei” este adevărat
+- [ ] Formularul activat în FormSubmit pentru a2statisticalanalysis@gmail.com, de pe domeniul final
+  (e-mailul de confirmare ajunge în acea căsuță)
 - [ ] Medicii știu de regula de ștergere în 12 luni și de răspunsul la cereri în maximum o lună

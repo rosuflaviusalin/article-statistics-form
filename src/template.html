@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Găitoane &amp; Dăescu | Cercetare clinică și statistică medicală</title>
+<title>A2 Statistical Analysis | Cercetare clinică și statistică medicală</title>
 <meta name="description" content="Asistență în cercetarea clinică: de la proiectarea studiului și analiza statistică până la publicarea articolului.">
 <style>
 /* Fonturile sunt incluse în pagină de build.py (src/fonts/), nu se încarcă de la Google. */
@@ -35,8 +35,8 @@ a{color:inherit}
 
 /* ---------- header ---------- */
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
-.brand{font:500 1.0625rem/1.2 var(--serif);text-decoration:none;letter-spacing:.005em}
-.brand small{display:block;font:400 .8125rem/1.3 var(--sans);color:var(--ink-soft)}
+.brand{display:block;line-height:0}
+.brand img{height:clamp(40px,4.4vw,52px);width:auto;mix-blend-mode:multiply}
 .top nav{display:flex;gap:22px;font-size:.9375rem}
 .top nav a{text-decoration:none;color:var(--ink-soft)}
 .top nav a:hover{color:var(--ink)}
@@ -215,6 +215,7 @@ a{color:inherit}
 .index .t{display:block;font:500 1.0625rem/1.3 var(--serif);color:#E9EEF3}
 .index .d{display:block;font-size:.84rem;color:#94A3B4;margin-top:4px;line-height:1.45}
 .index button:not([aria-current="true"]) .t{color:#B3C0CD}
+.index button:not([aria-current="true"]) .d{display:none}
 .index button:hover .t{color:#fff}
 .index button:focus-visible{outline:2px solid var(--signal);outline-offset:-2px}
 
@@ -322,11 +323,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="#">Găitoane &amp; Dăescu<small>Cercetare clinică și statistică medicală</small></a>
+    <a class="brand" href="#" aria-label="A2 Statistical Analysis, începutul paginii"><img src="__LOGO__" alt="A2 Statistical Analysis" width="720" height="146"></a>
     <nav aria-label="Navigare">
       <a href="#despre">Despre noi</a>
       <a href="#roluri">Aportul fiecărei părți</a>
-      <a href="#articole">Articole</a>
+      <a href="#articole">Exemple</a>
       <a href="#formular">Formular</a>
     </nav>
   </header>
@@ -336,10 +337,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div>
       <h1>Fiecare studiu are o poveste. O spunem cu cifre.</h1>
       <p class="slogan">De la întrebarea de cercetare la articolul publicat.</p>
-      <p class="lede">Doi medici psihiatri specializați în cercetare clinică și statistică medicală. Vă ajutăm cu o singură etapă sau cu întregul proiect.</p>
+      <p class="lede">Oferim asistență specializată, de la proiectarea studiului și analiza datelor până la pregătirea manuscrisului și trimiterea spre publicare.</p>
       <div class="ctas">
         <a class="btn" href="#formular">Descrieți proiectul</a>
-        <a class="btn ghost" href="#articole">Vedeți articolele</a>
+        <a class="btn ghost" href="#articole">Vedeți exemplele</a>
       </div>
     </div>
 
@@ -347,42 +348,42 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="roles-head">
       <div>
         <h2 id="rolT">Aportul fiecărei părți</h2>
-        <p>Dumneavoastră aduceți expertiza clinică și datele. Noi ne ocupăm de metodă, statistică și drumul până la publicare. Apăsați pe o etapă pentru detalii.</p>
+        <p>Dumneavoastră aduceți expertiza clinică și datele. Noi ne ocupăm de metodă, analiza statistică și drumul până la publicare. Apăsați pe o etapă pentru detalii.</p>
       </div>
       <div class="legend" aria-hidden="true"><span class="y"><i></i>Dumneavoastră</span><span class="u"><i></i>Noi, statisticienii</span></div>
     </div>
     <ol class="r-list">
         <li style="--y:70%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw1"><span class="r-num">1</span><span class="r-stage">Ideea și întrebarea de cercetare</span><span class="r-bar" role="img" aria-label="Aproximativ 70% dumneavoastră, 30% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw1" hidden><p class="yy"><b>Dumneavoastră:</b> Tema, întrebarea clinică și contextul ei.</p><p><b>Noi:</b> O transformăm într-o întrebare la care datele pot răspunde.</p></div>
+          <div class="r-who" id="rw1" hidden><p class="yy"><b>Dumneavoastră:</b> Propuneți tema și descrieți contextul clinic.</p><p><b>Noi:</b> Formulăm o întrebare de cercetare relevantă clinic, la care datele pot răspunde.</p></div>
         </li>
         <li style="--y:30%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw2"><span class="r-num">2</span><span class="r-stage">Obiectivele și designul studiului</span><span class="r-bar" role="img" aria-label="Aproximativ 30% dumneavoastră, 70% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw2" hidden><p class="yy"><b>Dumneavoastră:</b> Ce este fezabil în clinica dumneavoastră.</p><p><b>Noi:</b> Obiectivele, tipul de studiu și calculul eșantionului.</p></div>
+          <div class="r-who" id="rw2" hidden><p class="yy"><b>Dumneavoastră:</b> Precizați ce este fezabil în practica dumneavoastră.</p><p><b>Noi:</b> Definim obiectivele, propunem designul și estimăm dimensiunea eșantionului.</p></div>
         </li>
         <li style="--y:85%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw3"><span class="r-num">3</span><span class="r-stage">Colectarea datelor</span><span class="r-bar" role="img" aria-label="Aproximativ 85% dumneavoastră, 15% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw3" hidden><p class="yy"><b>Dumneavoastră:</b> Recrutarea pacienților și culegerea datelor.</p><p><b>Noi:</b> Șablonul bazei de date și regulile de codare.</p></div>
+          <div class="r-who" id="rw3" hidden><p class="yy"><b>Dumneavoastră:</b> Recrutați participanții și colectați datele.</p><p><b>Noi:</b> Definim variabilele și pregătim șablonul de colectare și regulile de codare.</p></div>
         </li>
         <li style="--y:25%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw4"><span class="r-num">4</span><span class="r-stage">Organizarea bazei de date</span><span class="r-bar" role="img" aria-label="Aproximativ 25% dumneavoastră, 75% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw4" hidden><p class="yy"><b>Dumneavoastră:</b> Clarificări despre variabile.</p><p><b>Noi:</b> Curățarea, verificarea și codarea datelor.</p></div>
+          <div class="r-who" id="rw4" hidden><p class="yy"><b>Dumneavoastră:</b> Clarificați particularitățile datelor clinice.</p><p><b>Noi:</b> Verificăm, curățăm și pregătim baza de date pentru analiză.</p></div>
         </li>
         <li style="--y:8%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw5"><span class="r-num">5</span><span class="r-stage">Analiza statistică</span><span class="r-bar" role="img" aria-label="Aproximativ 8% dumneavoastră, 92% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw5" hidden><p class="yy"><b>Dumneavoastră:</b> Răspunsuri la întrebări punctuale.</p><p><b>Noi:</b> Analiza completă, cu tabele și figuri.</p></div>
+          <div class="r-who" id="rw5" hidden><p class="yy"><b>Dumneavoastră:</b> Confirmați prioritățile clinice ale analizei.</p><p><b>Noi:</b> Aplicăm metodele statistice potrivite și prezentăm rezultatele în tabele și figuri.</p></div>
         </li>
         <li style="--y:45%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw6"><span class="r-num">6</span><span class="r-stage">Interpretarea rezultatelor</span><span class="r-bar" role="img" aria-label="Aproximativ 45% dumneavoastră, 55% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw6" hidden><p class="yy"><b>Dumneavoastră:</b> Semnificația clinică a rezultatelor.</p><p><b>Noi:</b> Semnificația statistică și limitele studiului.</p></div>
+          <div class="r-who" id="rw6" hidden><p class="yy"><b>Dumneavoastră:</b> Ne oferiți contextul specific pacienților și practicii dumneavoastră.</p><p><b>Noi:</b> Interpretăm rezultatele statistic și clinic, în raport cu literatura de specialitate și limitele studiului.</p></div>
         </li>
         <li style="--y:35%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw7"><span class="r-num">7</span><span class="r-stage">Redactarea manuscrisului</span><span class="r-bar" role="img" aria-label="Aproximativ 35% dumneavoastră, 65% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw7" hidden><p class="yy"><b>Dumneavoastră:</b> Introducerea clinică și revizia finală.</p><p><b>Noi:</b> Metodologia, rezultatele și discuția.</p></div>
+          <div class="r-who" id="rw7" hidden><p class="yy"><b>Dumneavoastră:</b> Verificați detaliile specifice studiului și aprobați versiunea finală.</p><p><b>Noi:</b> Redactăm manuscrisul complet, integrând contextul clinic, metodologia, rezultatele și discuția.</p></div>
         </li>
         <li style="--y:20%">
           <button class="r-head" type="button" aria-expanded="false" aria-controls="rw8"><span class="r-num">8</span><span class="r-stage">Alegerea revistei și trimiterea</span><span class="r-bar" role="img" aria-label="Aproximativ 20% dumneavoastră, 80% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw8" hidden><p class="yy"><b>Dumneavoastră:</b> Aprobarea revistei și a variantei finale.</p><p><b>Noi:</b> Selecția revistei, formatarea și răspunsul la recenzenți.</p></div>
+          <div class="r-who" id="rw8" hidden><p class="yy"><b>Dumneavoastră:</b> Aprobați revista și versiunea pentru trimitere.</p><p><b>Noi:</b> Propunem reviste potrivite, pregătim trimiterea și formulăm împreună răspunsurile către recenzenți.</p></div>
         </li>
     </ol>
     <p class="r-note">Proporțiile sunt orientative. Le stabilim împreună, în funcție de proiect.</p>
@@ -426,8 +427,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2 id="artT">Din articolele noastre</h2>
-        <p>Câteva figuri și tabele din lucrări publicate. Apăsați pe o pagină pentru a o mări.</p>
+        <h2 id="artT">Exemple din publicațiile noastre</h2>
+        <p>Figuri, tabele și fragmente din articolele noastre, de la analiza statistică la interpretarea clinică. Selectați o imagine pentru a o mări.</p>
       </div>
       <span class="counter" id="counter" aria-live="polite">1 din 5</span>
     </div>
@@ -461,7 +462,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <p>Conform art. 13 din Regulamentul (UE) 2016/679 (GDPR).</p>
 
     <h3>Cine prelucrează datele</h3>
-    <p>Dr. Alexandru Găitoane și Dr. Andrei Dăescu, în calitate de operatori. Contact pentru orice întrebare legată de datele dumneavoastră: <a href="mailto:flaviusalinrosu@gmail.com">flaviusalinrosu@gmail.com</a>.</p>
+    <p>Dr. Alexandru Găitoane și Dr. Andrei Dăescu, în calitate de operatori. Contact pentru orice întrebare legată de datele dumneavoastră: <a href="mailto:a2statisticalanalysis@gmail.com">a2statisticalanalysis@gmail.com</a>.</p>
 
     <h3>Ce date colectăm</h3>
     <p>Numele și prenumele, adresa de e-mail și/sau numărul de telefon, specialitatea și tema proiectului, tipul de proiect, etapele pentru care solicitați asistență și, opțional, alte detalii pe care alegeți să ni le transmiteți.</p>
@@ -569,7 +570,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <span>Dr. Alexandru Găitoane și Dr. Andrei Dăescu</span>
+    <span>A2 Statistical Analysis</span>
     <button type="button" class="linkbtn" data-privacy>Protecția datelor personale</button>
   </div>
 </footer>
@@ -593,18 +594,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   });
 
   /* ===== Configurare ===== */
-  var RECIPIENT = "flaviusalinrosu@gmail.com";
+  var RECIPIENT = "a2statisticalanalysis@gmail.com";
   var ENDPOINT  = "https://formsubmit.co/ajax/" + RECIPIENT;
 
 
 
   /* ===== Galerie ===== */
   var ARTICLES = [
-    {src:"__IMG1__", t:"AI at the Bedside of Psychiatry", d:"Meta-analiză comparativă a modelelor imagistice și non-imagistice. Journal of Clinical Medicine, MDPI.", alt:"Prima pagină a articolului AI at the Bedside of Psychiatry, publicat în Journal of Clinical Medicine"},
-    {src:"__IMG2__", t:"Meta-analiză cu efecte aleatorii", d:"Forest plot cu ajustare Hartung–Knapp, AUC pe scala logit și interval de predicție.", alt:"Forest plot dintr-o meta-analiză cu efecte aleatorii"},
-    {src:"__IMG3__", t:"Analiză de corelație", d:"Relația dintre scorurile FSFI și BESAQ, cu dreaptă de regresie și interval de încredere.", alt:"Grafic de dispersie FSFI total în funcție de BESAQ, r = -0,66"},
-    {src:"__IMG4__", t:"Clustere derivate prin PCA", d:"Profiluri de funcționare identificate prin analiza componentelor principale.", alt:"Grafic PCA cu două clustere și centroizii lor"},
-    {src:"__IMG5__", t:"Comparații între clustere", d:"Variabile clinice și psihosociale, cu interpretarea rezultatelor în text.", alt:"Tabelul 6, comparația variabilelor clinice între clustere"}
+    {src:"__IMG1__", t:"Diferențierea depresiei bipolare de cea unipolară", d:"Revizuire sistematică și meta-analiză a performanței modelelor bazate pe date imagistice și non-imagistice, publicată în Journal of Clinical Medicine.", alt:"Prima pagină a articolului AI at the Bedside of Psychiatry, publicat în Journal of Clinical Medicine"},
+    {src:"__IMG2__", t:"Performanța diagnostică a modelelor imagistice", d:"Forest plot dintr-o meta-analiză cu efecte aleatorii și ajustare Hartung–Knapp. Graficul prezintă estimarea combinată și intervalul de predicție.", alt:"Forest plot dintr-o meta-analiză cu efecte aleatorii"},
+    {src:"__IMG3__", t:"Imaginea corporală și funcția sexuală", d:"Grafic de dispersie cu dreaptă de regresie și interval de încredere. Scorurile mai mari de disconfort legat de imaginea corporală s-au asociat cu scoruri mai mici ale funcției sexuale.", alt:"Grafic de dispersie FSFI total în funcție de BESAQ, r = -0,66"},
+    {src:"__IMG4__", t:"Profiluri ale funcției sexuale", d:"Două profiluri identificate prin analiza de clustere pe baza scorurilor FSFI și vizualizate prin analiza componentelor principale (PCA).", alt:"Grafic PCA cu două clustere și centroizii lor"},
+    {src:"__IMG5__", t:"Diferențe clinice și psihosociale între profiluri", d:"Tabel comparativ al celor două profiluri, însoțit de interpretarea diferențelor privind indicele de masă corporală, circumferința abdominală și disconfortul legat de imaginea corporală.", alt:"Tabelul 6, comparația variabilelor clinice între clustere"}
   ];
   var stage = document.getElementById("stage"), index = document.getElementById("index"),
       counter = document.getElementById("counter"), cur = 0, sheets = [], items = [];
@@ -854,7 +855,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       var success = res.ok && (res.j.success === true || res.j.success === "true");
       if (!success) throw new Error(res.j.message || "Serviciul de e-mail nu a confirmat trimiterea.");
       form.innerHTML =
-        '<div class="done" tabindex="-1"><h3>Mulțumim, ' + escapeHtml(v.nume.split(" ")[0]) + '.</h3>' +
+        '<div class="done" tabindex="-1"><h3>Mulțumim, ' + escapeHtml(prenume(v.nume)) + '.</h3>' +
         '<p>Am primit detaliile proiectului. Vă contactăm în curând la ' + escapeHtml(v.contact) + '.</p>' +
         '<a class="btn ghost" href="#articole">Înapoi la articole</a></div>';
       form.querySelector(".done").focus();
@@ -867,6 +868,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     });
   });
 
+  // Câmpul cere „Nume și prenume”: primul cuvânt e numele, restul prenumele.
+  function prenume(full){
+    var w = full.trim().split(/\s+/);
+    return w.length > 1 ? w.slice(1).join(" ") : w[0];
+  }
   function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 })();
 </script>

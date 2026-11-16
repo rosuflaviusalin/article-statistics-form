@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parent
 TEMPLATE = ROOT / "src" / "template.html"
 OUTPUT = ROOT / "index.html"
 FONTS_DIR = ROOT / "src" / "fonts"
+# Logo decupat și micșorat din docs/logo.jpeg (placeholder __LOGO__ în header).
+LOGO = ROOT / "src" / "img" / "logo.jpg"
 
 # Ordinea corespunde array-ului ARTICLES din template (__IMG1__ ... __IMG5__).
 IMAGES = [
@@ -39,6 +41,10 @@ def main() -> None:
     if "/*__FONTS__*/" not in html:
         raise SystemExit("Eroare: lipsește placeholder-ul /*__FONTS__*/ din template.")
     html = html.replace("/*__FONTS__*/", fonts_css())
+    if "__LOGO__" not in html:
+        raise SystemExit("Eroare: lipsește placeholder-ul __LOGO__ din template.")
+    logo = base64.b64encode(LOGO.read_bytes()).decode()
+    html = html.replace("__LOGO__", f"data:image/jpeg;base64,{logo}")
     for i, name in enumerate(IMAGES, 1):
         data = base64.b64encode((ROOT / "docs" / name).read_bytes()).decode()
         html = html.replace(f"__IMG{i}__", f"data:image/jpeg;base64,{data}")
