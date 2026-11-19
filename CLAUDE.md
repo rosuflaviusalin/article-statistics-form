@@ -129,6 +129,9 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 - **Production branch = `develop`**: orice push pe `develop` (inclusiv hook-ul automat) ajunge live în ~1 minut.
 - Build în Pages: comanda `mkdir -p dist && cp index.html dist/`, output `dist`. Așa se publică
   **doar** `index.html`; `docs/`, `src/`, `gdpr.md`, `CLAUDE.md` nu devin publice. Nu schimba output-ul în rădăcină.
+- `dist/` (în git) conține fișierele publicate lângă pagină: `og-image.jpg` (1200×630, previzualizarea
+  linkului pe WhatsApp/Facebook), `favicon.png`, `apple-touch-icon.png`. Build-ul Cloudflare doar adaugă
+  `index.html` în `dist/`. Rețelele sociale cer URL absolut, deci aici nu merge base64.
 - Cloudflare „Email Obfuscation” înlocuiește adresa din nota GDPR cu un script `/cdn-cgi/...`
   (în browser se afișează normal). Verifică modificările și pe site-ul live, nu doar local.
 - FormSubmit cere `https://` (nu merge din `file://`) și activare de pe domeniul final.
