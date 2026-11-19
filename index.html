@@ -769,7 +769,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 
   /* ===== Configurare ===== */
   var RECIPIENT = "a2statisticalanalysis@gmail.com";
-  var ENDPOINT  = "https://formsubmit.co/ajax/" + RECIPIENT;
+  // Adresa aplicației Google Apps Script (apps-script/Code.gs). Cât e goală, se folosește FormSubmit.
+  var APPS_SCRIPT = "";
+  var ENDPOINT  = APPS_SCRIPT || "https://formsubmit.co/ajax/" + RECIPIENT;
 
 
 
@@ -1026,7 +1028,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 
     fetch(ENDPOINT, {
       method:"POST",
-      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      // Apps Script nu acceptă cereri CORS „preflight”: trimitem JSON ca text/plain.
+      headers: APPS_SCRIPT ? {"Content-Type":"text/plain;charset=utf-8"} : {"Content-Type":"application/json","Accept":"application/json"},
       body: JSON.stringify(payload)
     })
     .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
