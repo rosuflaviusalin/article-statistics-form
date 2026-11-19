@@ -205,6 +205,7 @@ a{color:inherit}
 .round:hover{border-color:#fff;background:rgba(255,255,255,.06)}
 .round svg{width:18px;height:18px}
 .hint{font-size:.8125rem;color:#8A99AA;margin-left:8px}
+.cap{display:none;margin:16px 0 0;font-size:.9375rem;line-height:1.5;color:#C3CEDA}
 .index{list-style:none;margin:0;padding:0;border-top:1px solid #33435A}
 .index button{
   all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;
@@ -309,6 +310,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .index li{flex:0 0 72%;scroll-snap-align:start}
   .index button{border:1px solid #33435A;padding:12px 14px 12px 18px;height:100%}
   .index .d{display:none}
+  .cap{display:block}
 }
 @media (max-width: 560px){
   .top nav{display:none}
@@ -441,6 +443,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <button class="round" id="next" type="button" aria-label="Pagina următoare"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7.5 4 6 6-6 6"/></svg></button>
           <span class="hint">Folosiți săgețile tastaturii sau glisați</span>
         </div>
+        <p class="cap" id="cap"></p>
       </div>
       <ol class="index" id="index"></ol>
     </div>
@@ -608,7 +611,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     {src:"__IMG5__", t:"Diferențe clinice și psihosociale între profiluri", d:"Tabel comparativ al celor două profiluri, însoțit de interpretarea diferențelor privind indicele de masă corporală, circumferința abdominală și disconfortul legat de imaginea corporală.", alt:"Tabelul 6, comparația variabilelor clinice între clustere"}
   ];
   var stage = document.getElementById("stage"), index = document.getElementById("index"),
-      counter = document.getElementById("counter"), cur = 0, sheets = [], items = [];
+      counter = document.getElementById("counter"), cap = document.getElementById("cap"), cur = 0, sheets = [], items = [];
 
   ARTICLES.forEach(function(a, i){
     var b = document.createElement("button");
@@ -636,6 +639,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     });
     items.forEach(function(it, i){ it.setAttribute("aria-current", i === cur ? "true" : "false"); });
     counter.textContent = (cur + 1) + " din " + N;
+    cap.textContent = ARTICLES[cur].d; // descrierea pe mobil (în listă e ascunsă sub 920px)
     if (window.matchMedia("(max-width:920px)").matches) {
       var li = items[cur].parentNode;
       index.scrollTo({left: li.offsetLeft - index.offsetLeft, behavior: "smooth"});
