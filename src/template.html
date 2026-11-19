@@ -52,7 +52,7 @@ a{color:inherit}
 /* ---------- header ---------- */
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
 .brand{display:block;line-height:0}
-.brand img{height:clamp(40px,4.4vw,52px);width:auto;mix-blend-mode:multiply}
+.brand img{height:clamp(40px,4.4vw,52px);width:auto;mix-blend-mode:multiply;filter:brightness(1.06) contrast(1.08)}
 .top nav{display:flex;gap:22px;font-size:.9375rem}
 .top nav a{text-decoration:none;color:var(--ink-soft)}
 .top nav a:hover{color:var(--ink)}
@@ -329,6 +329,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 }
 @media (max-width: 560px){
   .top nav{display:none}
+  /* pe telefon: logo, hero și titlurile secțiunilor centrate; butoanele pe toată lățimea */
+  .top{justify-content:center}
+  .hero > div:first-child{text-align:center}
+  .hero .lede{margin-left:auto;margin-right:auto}
+  .hero .ctas{flex-direction:column;gap:10px}
+  .hero .ctas .btn{width:100%;justify-content:center}
+  .about h2,.about .a-fade{text-align:center}
+  .about .a-fade{margin-left:auto;margin-right:auto}
+  .section-head{flex-direction:column;align-items:center;text-align:center}
+  .section-head p{margin-left:auto;margin-right:auto}
+  .stage-ctrl{justify-content:center}
+  .cap{text-align:center}
+  .form-intro{text-align:center}
+  .form-intro p{margin-left:auto;margin-right:auto}
+  .form-intro .mail{border-left:0;padding-left:0}
+  .form-intro .mail::before{content:"";display:block;width:40px;height:3px;background:var(--signal);margin:0 auto 12px}
   .stage{aspect-ratio:1/1}
   .sheet[data-pos="1"]{transform:translate(8px,-8px) rotate(1.4deg)}
   .sheet[data-pos="2"]{transform:translate(14px,-14px) rotate(2.6deg)}
@@ -512,7 +528,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="form-intro">
         <h2 id="formT">Spuneți-ne despre proiectul dumneavoastră</h2>
         <p>Completarea durează în jur de două minute. Vă contactăm pentru o discuție inițială, fără niciun angajament.</p>
-        <p class="mail">Răspunsurile ajung direct pe e-mail la Alexandru și Andrei.</p>
+        <p class="mail">Răspunsurile ajung direct pe e-mail la echipa A2 Statistical Analysis.</p>
       </div>
 
       <div>
