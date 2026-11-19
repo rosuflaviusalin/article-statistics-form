@@ -512,8 +512,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 
     <h3>Cine mai primește datele</h3>
     <ul>
-      <li>FormSubmit (formsubmit.co), serviciul care transmite formularul prin e-mail;</li>
-      <li>Google (Gmail), unde este primit și păstrat mesajul.</li>
+      <li>Google (Google Apps Script și Gmail), prin care formularul este transmis, primit și păstrat;</li>
+      <li>Cloudflare, care găzduiește pagina și transmite conexiunea către aceasta.</li>
     </ul>
     <p>Acești furnizori pot prelucra datele și în afara Spațiului Economic European.</p>
 
@@ -637,9 +637,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 
   /* ===== Configurare ===== */
   var RECIPIENT = "a2statisticalanalysis@gmail.com";
-  // Adresa aplicației Google Apps Script (apps-script/Code.gs). Cât e goală, se folosește FormSubmit.
-  var APPS_SCRIPT = "";
-  var ENDPOINT  = APPS_SCRIPT || "https://formsubmit.co/ajax/" + RECIPIENT;
+  // Google Apps Script instalat în contul A2 (sursa: apps-script/Code.gs). Trimite e-mailul din Gmail.
+  var ENDPOINT  = "https://script.google.com/macros/s/AKfycby2fIlcufmYbMvtf2vAHghvo1wY5RyusmCbumQ8MXSQLfCXaDYSR_Qrf827dvnjX891/exec";
 
 
 
@@ -888,16 +887,14 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
       "Tip de proiect": v.tip,
       "Etape pentru care se cere asistență": v.etape.join("; "),
       "Detalii suplimentare": v.detalii || "-",
-      "_subject": "Proiect nou: " + v.nume + " (" + v.tema.slice(0, 60) + ")",
-      "_template": "table",
-      "_captcha": "false"
+      "_subject": "Proiect nou: " + v.nume + " (" + v.tema.slice(0, 60) + ")"
     };
     var re = emailIn(v.contact); if (re) payload._replyto = re;
 
     fetch(ENDPOINT, {
       method:"POST",
       // Apps Script nu acceptă cereri CORS „preflight”: trimitem JSON ca text/plain.
-      headers: APPS_SCRIPT ? {"Content-Type":"text/plain;charset=utf-8"} : {"Content-Type":"application/json","Accept":"application/json"},
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
       body: JSON.stringify(payload)
     })
     .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })

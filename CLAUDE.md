@@ -15,8 +15,10 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 - **Un singur fișier HTML** livrabil: [index.html](index.html), cu HTML + CSS + JavaScript vanilla.
   Fără framework-uri, fără npm, fără bundler.
 - **Imaginile sunt incluse în HTML ca base64** (data URI), ca pagina să nu depindă de stocare externă.
-- **FormSubmit.co** (gratuit) trimite formularul pe e-mail prin `fetch()` POST JSON la
-  `https://formsubmit.co/ajax/<email>`. Nu există backend propriu.
+- **Google Apps Script** (gratuit, max. 100 e-mailuri/zi) trimite formularul pe e-mail: pagina face `fetch()`
+  POST cu JSON ca `text/plain` (fără preflight CORS) la URL-ul `/exec` din `ENDPOINT`. Scriptul
+  ([apps-script/Code.gs](apps-script/Code.gs)) e instalat în contul a2statisticalanalysis@gmail.com și trimite cu `MailApp`.
+  FormSubmit a fost abandonat (e-mailul de activare pentru domeniu nu a sosit niciodată).
 - **Fonturi locale**: Spectral (serif, titluri) și Instrument Sans (text), fișiere `.woff2` în
   `src/fonts/`, incluse în pagină ca base64 de `build.py`. **Nu folosi Google Fonts** (link-uri la
   fonts.googleapis.com / fonts.gstatic.com): ar trimite adresa IP a vizitatorilor la Google, problemă
@@ -29,6 +31,7 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 ```
 index.html          # FIȘIER GENERAT – nu se editează manual
 src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/, __LOGO__ și __IMG1__…__IMG5__
+apps-script/        # scriptul Google pentru formular (Code.gs) + pașii de instalare (README.md); nu e public
 src/img/logo.png    # logo decupat din docs/logo.jpeg, fundal transparent (nu folosi mix-blend-mode/filter: Safari iOS)
 src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
 build.py            # include fonturile și imaginile ca base64 → index.html
@@ -41,7 +44,7 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 
 1. Modifici **doar** `src/template.html` (sau `build.py` / imaginile din `docs/`).
 2. Rulezi `python3 build.py` → regenerează `index.html`.
-3. Testezi local prin server HTTP (FormSubmit **nu** funcționează din `file://`):
+3. Testezi local prin server HTTP:
    `python3 -m http.server 8000` → http://localhost:8000/index.html
 4. Commit + push pe `develop` (vezi secțiunea Git).
 
@@ -83,25 +86,26 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 
 ## Formularul și e-mailul
 
-- Configurare în JS: `RECIPIENT` (`a2statisticalanalysis@gmail.com`) și `ENDPOINT`.
+- Configurare în JS: `RECIPIENT` (`a2statisticalanalysis@gmail.com`, folosit la `mailto:`) și `ENDPOINT`
+  (URL-ul Web app al scriptului). Destinatarul real e constanta `RECIPIENT` din `Code.gs`.
 - După trimitere: „Mulțumim, <prenume>.” (funcția `prenume()`: tot ce urmează după primul cuvânt din „Nume și prenume”).
 - Validare client: nume, contact (e-mail sau telefon), temă, tip proiect (radio), cel puțin o etapă.
   „Întregul proiect” și „Aș dori să stabilim împreună” sunt exclusive (`data-exclusive`).
-- Payload: chei în română + `_subject`, `_template: "table"`, `_captcha: "false"`, `_replyto`.
+- Payload: chei în română + `_subject`, `_replyto` (devine Reply-To dacă e un e-mail valid). Răspuns: `{"success":true}`.
 - Fallback la eroare: link `mailto:` cu toate răspunsurile precompletate.
-- FormSubmit cere **activare** la prima trimitere de pe fiecare domeniu (e-mail de confirmare).
-- Recomandare deschisă: înlocuirea adresei din `ENDPOINT` cu codul aleator oferit de FormSubmit.
+- Modificarea scriptului: în script.google.com → Deploy → Manage deployments → creion → New version
+  (URL-ul rămâne același; un „New deployment” ar schimba URL-ul și trebuie actualizat `ENDPOINT`).
+- Contul A2 a fost creat supravegheat în Family Link, care blochează Apps Script; supravegherea a fost scoasă.
 
 ## GDPR (implementat)
 
 Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gdpr.md](gdpr.md).
 
 - Notă de informare art. 13: operatori = cei doi medici, contact = adresa din `RECIPIENT`,
-  temei art. 6(1)(b), destinatari FormSubmit + Google, păstrare max. 12 luni, drepturi, ANSPDCP.
+  temei art. 6(1)(b), destinatari Google (Apps Script + Gmail) și Cloudflare (găzduire), păstrare max. 12 luni, drepturi, ANSPDCP.
 - Avertisment vizibil: fără date despre pacienți.
 - Adresa de contact din notă = `RECIPIENT` = a2statisticalanalysis@gmail.com (de păstrat sincronizate).
-- Puncte rămase (neimplementate, la decizia utilizatorului): FormSubmit fără DPA
-  (alternativă: Google Apps Script). Fără bifă în formular: decizie luată (temei art. 6(1)(b), doar informare).
+- Fără bifă în formular: decizie luată (temei art. 6(1)(b), doar informare).
 
 ## Comportamente de reținut
 
@@ -133,4 +137,4 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
   `index.html` în `dist/`. Rețelele sociale cer URL absolut, deci aici nu merge base64.
 - Cloudflare „Email Obfuscation” înlocuiește adresa din nota GDPR cu un script `/cdn-cgi/...`
   (în browser se afișează normal). Verifică modificările și pe site-ul live, nu doar local.
-- FormSubmit cere `https://` (nu merge din `file://`) și activare de pe domeniul final.
+- Formularul merge și local (Apps Script nu verifică domeniul), dar fiecare test trimite un e-mail real.

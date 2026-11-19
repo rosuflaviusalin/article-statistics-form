@@ -42,7 +42,7 @@ sau se încheie contracte online.
    - cine sunt operatorii și adresa de contact;
    - ce date se colectează și de ce;
    - temeiul legal (art. 6 alin. 1 lit. b);
-   - cine mai primește datele: FormSubmit (transmite formularul) și Google (Gmail), cu mențiunea
+   - cine mai primește datele: Google (Apps Script și Gmail) și Cloudflare (găzduirea), cu mențiunea
      că pot fi prelucrate și în afara Spațiului Economic European;
    - durata de păstrare: maximum 12 luni dacă nu se ajunge la o colaborare;
    - drepturile persoanei și dreptul de a face plângere la ANSPDCP (dataprotection.ro).
@@ -61,17 +61,11 @@ sau se încheie contracte online.
 
 ## Ce rămâne de decis (opțional)
 
-### 1. FormSubmit fără contract de prelucrare (DPA)
+### 1. Transmiterea formularului (rezolvat)
 
-**Ce se întâmplă:** FormSubmit este un serviciu gratuit care primește datele din formular și le
-trimite pe e-mail. Nu oferă un contract de prelucrare a datelor (DPA, art. 28 GDPR), iar datele
-pot trece prin servere din afara UE.
-
-**Variantă mai curată:** un **Google Apps Script** legat de contul de Gmail al medicilor. Rămâne
-gratuit, datele ajung doar la Google, fără un intermediar în plus. Pagina se modifică foarte puțin.
-
-**Recomandare:** acceptabil pentru început, dat fiind volumul mic; de reluat dacă volumul crește.
-**Status: de decis.**
+Formularul nu mai trece prin FormSubmit (serviciu gratuit fără contract de prelucrare, DPA). Acum
+folosește un **Google Apps Script** din contul a2statisticalanalysis@gmail.com: datele ajung doar la
+Google, fără intermediar.
 
 ### 2. Gmail gratuit vs. Google Workspace
 
@@ -83,6 +77,5 @@ semnat de Google. Gmail gratuit nu. Pentru volumul actual este acceptabil, dar e
 - [x] Adresa de e-mail din cod (`RECIPIENT`) este cea a medicilor: a2statisticalanalysis@gmail.com
 - [x] Aceeași adresă este adresa de contact din nota de informare
 - [x] Textul „Răspunsurile ajung direct pe e-mail la echipa A2 Statistical Analysis” este adevărat
-- [ ] Formularul activat în FormSubmit pentru a2statisticalanalysis@gmail.com, de pe domeniul final
-  (e-mailul de confirmare ajunge în acea căsuță)
+- [x] Formularul trimite e-mailuri la a2statisticalanalysis@gmail.com (Google Apps Script, testat 2026-11-19)
 - [ ] Medicii știu de regula de ștergere în 12 luni și de răspunsul la cereri în maximum o lună
