@@ -314,7 +314,8 @@ dialog.pv::backdrop{background:rgba(12,18,27,.6)}
 .pv .pv-close{position:sticky;top:0;float:right;border-color:var(--rule);color:var(--ink);background:#fff;margin:-8px -8px 0 12px}
 .pv .pv-close:hover{background:var(--paper);border-color:var(--ink)}
 footer{border-top:1px solid var(--rule);padding:28px 0 40px;font-size:.875rem;color:var(--ink-soft)}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.f-logo{height:36px;width:auto}
 
 /* ---------- responsive ---------- */
 @media (max-width: 920px){
@@ -340,6 +341,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .section-head{flex-direction:column;align-items:center;text-align:center}
   .section-head p{margin-left:auto;margin-right:auto}
   .stage-ctrl{justify-content:center}
+  footer .wrap{flex-direction:column;justify-content:center}
   .cap{text-align:center}
   .form-intro{text-align:center}
   .form-intro p{margin-left:auto;margin-right:auto}
@@ -604,7 +606,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <span>A2 Statistical Analysis</span>
+    <img class="f-logo" alt="A2 Statistical Analysis" width="1080" height="219">
     <button type="button" class="linkbtn" data-privacy>Protecția datelor personale</button>
   </div>
 </footer>
@@ -612,6 +614,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <script>
 (function(){
   /* ===== Pornire de la începutul paginii la refresh ===== */
+  // logo-ul din subsol refolosește imaginea din antet (base64 inclus o singură dată în pagină)
+  document.querySelector(".f-logo").src = document.querySelector(".brand img").src;
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   if (location.hash) history.replaceState(null, "", location.pathname + location.search);
   window.scrollTo(0, 0);
