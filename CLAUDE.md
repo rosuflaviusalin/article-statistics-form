@@ -30,7 +30,7 @@ doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat 
 ```
 index.html          # FIȘIER GENERAT – nu se editează manual
 src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*/, __LOGO__ și __IMG1__…__IMG5__
-src/img/logo.jpg    # logo decupat/micșorat din docs/logo.jpeg (afișat cu mix-blend-mode:multiply)
+src/img/logo.png    # logo decupat din docs/logo.jpeg, fundal transparent (nu folosi mix-blend-mode/filter: Safari iOS)
 src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
 build.py            # include fonturile și imaginile ca base64 → index.html
 docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.jpeg) + idee.docx

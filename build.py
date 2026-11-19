@@ -12,8 +12,9 @@ ROOT = Path(__file__).resolve().parent
 TEMPLATE = ROOT / "src" / "template.html"
 OUTPUT = ROOT / "index.html"
 FONTS_DIR = ROOT / "src" / "fonts"
-# Logo decupat și micșorat din docs/logo.jpeg (placeholder __LOGO__ în header).
-LOGO = ROOT / "src" / "img" / "logo.jpg"
+# Logo decupat din docs/logo.jpeg, cu fundal transparent (placeholder __LOGO__ în header).
+# PNG transparent, nu JPEG + mix-blend-mode: Safari pe iPhone afișa un dreptunghi alb.
+LOGO = ROOT / "src" / "img" / "logo.png"
 
 # Ordinea corespunde array-ului ARTICLES din template (__IMG1__ ... __IMG5__).
 IMAGES = [
@@ -44,7 +45,7 @@ def main() -> None:
     if "__LOGO__" not in html:
         raise SystemExit("Eroare: lipsește placeholder-ul __LOGO__ din template.")
     logo = base64.b64encode(LOGO.read_bytes()).decode()
-    html = html.replace("__LOGO__", f"data:image/jpeg;base64,{logo}")
+    html = html.replace("__LOGO__", f"data:image/png;base64,{logo}")
     for i, name in enumerate(IMAGES, 1):
         data = base64.b64encode((ROOT / "docs" / name).read_bytes()).decode()
         html = html.replace(f"__IMG{i}__", f"data:image/jpeg;base64,{data}")
