@@ -322,8 +322,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   .hero,.about-grid,.form-grid{grid-template-columns:1fr}
   .form-intro{position:static}
   .viewer{grid-template-columns:1fr}
-  .index{display:flex;overflow-x:auto;border-top:0;gap:8px;scroll-snap-type:x mandatory;padding-bottom:6px}
-  .index li{flex:0 0 72%;scroll-snap-align:start}
+  .index{display:flex;border-top:0}
+  .index li{flex:1 1 100%}
+  .index li:not(.cur){display:none} /* pe telefon/tabletă doar titlul imaginii curente */
   .index button{border:1px solid #33435A;padding:12px 14px 12px 18px;height:100%}
   .index .d{display:none}
   .cap{display:block}
@@ -675,13 +676,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
       s.tabIndex = p === 0 ? 0 : -1;
       s.setAttribute("aria-hidden", p === 0 ? "false" : "true");
     });
-    items.forEach(function(it, i){ it.setAttribute("aria-current", i === cur ? "true" : "false"); });
+    items.forEach(function(it, i){
+      it.setAttribute("aria-current", i === cur ? "true" : "false");
+      it.parentNode.classList.toggle("cur", i === cur);
+    });
     counter.textContent = (cur + 1) + " din " + N;
     cap.textContent = ARTICLES[cur].d; // descrierea pe mobil (în listă e ascunsă sub 920px)
-    if (window.matchMedia("(max-width:920px)").matches) {
-      var li = items[cur].parentNode;
-      index.scrollTo({left: li.offsetLeft - index.offsetLeft, behavior: "smooth"});
-    }
   }
   document.getElementById("prev").addEventListener("click", function(){ go(cur - 1); });
   document.getElementById("next").addEventListener("click", function(){ go(cur + 1); });

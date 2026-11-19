@@ -9,7 +9,6 @@ medici psihiatri specializați în cercetare clinică și statistică medicală.
 doctoranzi) descriu proiectul lor de cercetare, iar răspunsurile ajung automat pe e-mail.
 
 - Repo: https://github.com/rosuflaviusalin/article-statistics-form (privat)
-- Sursa conținutului: [docs/idee.docx](docs/idee.docx) (prezentarea medicilor + întrebările formularului)
 
 ## Tehnologii
 
@@ -33,7 +32,7 @@ src/template.html   # SURSA paginii (HTML/CSS/JS), cu placeholder-e /*__FONTS__*
 src/img/logo.png    # logo decupat din docs/logo.jpeg, fundal transparent (nu folosi mix-blend-mode/filter: Safari iOS)
 src/fonts/          # fonturile .woff2 (latin + latin-ext pentru diacritice) + fonts.css
 build.py            # include fonturile și imaginile ca base64 → index.html
-docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.jpeg) + idee.docx
+docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.jpeg) + logo.jpeg (sursa logo-ului)
 .claude/settings.json        # hook Stop → urcare automată pe GitHub
 .claude/hooks/auto-push.sh   # scriptul hook-ului
 ```
@@ -78,7 +77,7 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 4. **Exemple din publicațiile noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
    index lateral `.index`, lightbox `<dialog id="lb">`, săgeți tastatură + swipe).
    Datele imaginilor sunt în array-ul JS `ARTICLES`.
-5. **Formular**: cele 5 întrebări din idee.docx + câmp opțional „detalii”, honeypot `_honey`,
+5. **Formular**: cele 5 întrebări despre proiect + câmp opțional „detalii”, honeypot `_honey`,
    avertisment să nu se trimită date despre pacienți.
 6. **Footer** + **nota de informare GDPR** (`<dialog id="privacy">`, deschisă de orice `[data-privacy]`).
 
