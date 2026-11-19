@@ -81,7 +81,7 @@ a{color:inherit}
 .about-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,4.5vw,64px);align-items:center}
 .about h2,.section-head h2,.form-intro h2{font:400 clamp(1.75rem,3.2vw,2.5rem)/1.12 var(--serif);letter-spacing:-.01em;margin:0}
 .about h2{font-size:clamp(2rem,3.8vw,3rem);margin-bottom:24px;text-wrap:balance}
-.about h2 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.about h2 .ln{display:block}
 .about h2 .ln > span{display:block}
 .about p{margin:0 0 1em;max-width:58ch;font-family:var(--serif);font-size:1.125rem;line-height:1.7}
 
@@ -141,16 +141,11 @@ a{color:inherit}
   .on .draw,.on .grow,.on .pop,.on .fade,.on .flow,.on .excl,.on .incl,.on .mx-copy > *{animation:none}
 }
 
-/* animația de intrare a secțiunii (doar cu JS activ) */
+/* animația de intrare a secțiunii (doar cu JS activ): fiecare element (.rv) apare
+   când intră el însuși în ecran, ca să nu rămână titlul gol cât secțiunea e încă jos */
 @media (prefers-reduced-motion: no-preference){
-  .about.anim .ln > span{transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-  .about.anim .ln:nth-child(2) > span{transition-delay:.12s}
-  .about.anim .a-fade{opacity:0;transform:translateY(14px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
-  .about.anim .a-fade:nth-of-type(1){transition-delay:.3s}
-  .about.anim .a-fade:nth-of-type(2){transition-delay:.42s}
-  .about.anim .mx{opacity:0;transform:translateY(24px);transition:opacity .8s .2s,transform .8s .2s cubic-bezier(.2,.8,.2,1)}
-  .about.in .ln > span{transform:none}
-  .about.in .a-fade,.about.in .mx{opacity:1;transform:none}
+  .about.anim .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease-out,transform .6s cubic-bezier(.2,.8,.2,1)}
+  .about.anim .rv.in{opacity:1;transform:none}
 }
 @media (max-width:560px){
   .mx-tabs{grid-template-columns:1fr 1fr}
@@ -415,8 +410,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="about-grid">
       <div>
         <h2 id="despreT"><span class="ln"><span>Perspectiva clinicianului,</span></span><span class="ln"><span>rigoarea statisticianului</span></span></h2>
-        <p class="a-fade">Suntem Alexandru Găitoane și Andrei Dăescu, medici specialiști psihiatri, cu specializare în cercetare clinică și statistică medicală și experiență în proiecte de cercetare și publicații științifice în mai multe specialități medicale.</p>
-        <p class="a-fade">Vă însoțim de la formularea întrebării de cercetare până la interpretarea rezultatelor în context clinic, alegerea revistei și trimiterea spre publicare.</p>
+        <p class="a-fade rv">Suntem Alexandru Găitoane și Andrei Dăescu, medici specialiști psihiatri, cu specializare în cercetare clinică și statistică medicală și experiență în proiecte de cercetare și publicații științifice în mai multe specialități medicale.</p>
+        <p class="a-fade rv">Vă însoțim de la formularea întrebării de cercetare până la interpretarea rezultatelor în context clinic, alegerea revistei și trimiterea spre publicare.</p>
       </div>
       <div class="mx" aria-label="Metode cu care lucrăm">
         <div class="mx-tabs" role="tablist" aria-label="Categorii de metode"><button class="mx-tab" type="button" role="tab" id="mx-t1" aria-controls="mx-p1" aria-selected="true" tabindex="0">Analize statistice<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t2" aria-controls="mx-p2" aria-selected="false" tabindex="-1">Diagnostic și predicție<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t3" aria-controls="mx-p3" aria-selected="false" tabindex="-1">Sinteza dovezilor<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t4" aria-controls="mx-p4" aria-selected="false" tabindex="-1">Inteligență artificială<span class="bar" aria-hidden="true"><i></i></span></button></div>
@@ -698,10 +693,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     var sec = document.querySelector(".about");
     if (!sec || !("IntersectionObserver" in window)) return;
     sec.classList.add("anim");
+    var els = sec.querySelectorAll("h2, .rv, .mx");
     var io = new IntersectionObserver(function(en){
-      if (en[0].isIntersecting){ sec.classList.add("in"); io.disconnect(); }
-    }, {threshold: .2});
-    io.observe(sec);
+      en.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {rootMargin: "0px 0px -8% 0px"});
+    Array.prototype.forEach.call(els, function(el){ el.classList.add("rv"); io.observe(el); });
   })();
 
   /* ===== Explorator de metode: file cu derulare automată ===== */
