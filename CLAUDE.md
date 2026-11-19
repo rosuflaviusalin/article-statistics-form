@@ -122,11 +122,13 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 
 ## Publicare
 
-- Site live: **https://a2statisticalanalysis.ro** (în configurare), găzduit pe **Cloudflare Pages**,
+- Site live: **https://a2statisticalanalysis.ro** (și `www.`, live din 2026-11-19), găzduit pe **Cloudflare Pages**,
   proiect `article-statistics-form` (previzualizare https://article-statistics-form.pages.dev), plan gratuit.
 - Domeniul e cumpărat de la **Datahost**, fără administrare DNS; nameserverele sunt cele Cloudflare
   (`dara`/`lou.ns.cloudflare.com`), iar DNS-ul e în același cont Cloudflare ca vitrina_cu_delicii.
 - **Production branch = `develop`**: orice push pe `develop` (inclusiv hook-ul automat) ajunge live în ~1 minut.
 - Build în Pages: comanda `mkdir -p dist && cp index.html dist/`, output `dist`. Așa se publică
   **doar** `index.html`; `docs/`, `src/`, `gdpr.md`, `CLAUDE.md` nu devin publice. Nu schimba output-ul în rădăcină.
+- Cloudflare „Email Obfuscation” înlocuiește adresa din nota GDPR cu un script `/cdn-cgi/...`
+  (în browser se afișează normal). Verifică modificările și pe site-ul live, nu doar local.
 - FormSubmit cere `https://` (nu merge din `file://`) și activare de pe domeniul final.
