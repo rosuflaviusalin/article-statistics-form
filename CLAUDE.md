@@ -51,7 +51,8 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 ## Git și urcarea automată
 
 - Branch de lucru: **`develop`**. Tot codul nou se urcă pe `origin/develop`.
-- `main` rămâne branch-ul stabil; merge-ul `develop → main` se face doar la cererea utilizatorului.
+- **`develop` este producția** (Cloudflare Pages îl publică automat). `main` nu e folosit pentru publicare;
+  merge-ul `develop → main` se face doar la cererea utilizatorului.
 - **Hook automat** (Stop, în `.claude/settings.json`): la finalul fiecărui răspuns, dacă există
   modificări și branch-ul curent e `develop`, scriptul `.claude/hooks/auto-push.sh`:
   regenerează `index.html` dacă s-a schimbat sursa, face `git add -A`, commit și `git push origin develop`.
@@ -121,5 +122,11 @@ Explicațiile complete, deciziile deschise și lista pentru lansare sunt în [gd
 
 ## Publicare
 
-Pagina trebuie servită prin `https://` pentru ca FormSubmit să meargă: Netlify Drop sau GitHub Pages
-(e suficient `index.html`, imaginile sunt incluse în el).
+- Site live: **https://a2statisticalanalysis.ro** (în configurare), găzduit pe **Cloudflare Pages**,
+  proiect `article-statistics-form` (previzualizare https://article-statistics-form.pages.dev), plan gratuit.
+- Domeniul e cumpărat de la **Datahost**, fără administrare DNS; nameserverele sunt cele Cloudflare
+  (`dara`/`lou.ns.cloudflare.com`), iar DNS-ul e în același cont Cloudflare ca vitrina_cu_delicii.
+- **Production branch = `develop`**: orice push pe `develop` (inclusiv hook-ul automat) ajunge live în ~1 minut.
+- Build în Pages: comanda `mkdir -p dist && cp index.html dist/`, output `dist`. Așa se publică
+  **doar** `index.html`; `docs/`, `src/`, `gdpr.md`, `CLAUDE.md` nu devin publice. Nu schimba output-ul în rădăcină.
+- FormSubmit cere `https://` (nu merge din `file://`) și activare de pe domeniul final.
