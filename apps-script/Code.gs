@@ -6,14 +6,15 @@
  */
 const RECIPIENT = "a2statisticalanalysis@gmail.com";
 
-// Câmpurile afișate în e-mail, în ordine (cheile trimise de pagină).
+// Câmpurile afișate în e-mail, în ordine: [cheia trimisă de pagină, eticheta din e-mail].
+// Cheile nu se schimbă (ca o versiune veche a scriptului să funcționeze în continuare).
 const FIELDS = [
-  "Nume și prenume",
-  "Contact",
-  "Specialitate și temă",
-  "Tip de proiect",
-  "Etape pentru care se cere asistență",
-  "Detalii suplimentare"
+  ["Nume și prenume", "Nume și prenume"],
+  ["Contact", "Contact"],
+  ["Specialitate și temă", "Specialitate și temă"],
+  ["Tip de proiect", "Tip de proiect"],
+  ["Etape pentru care se cere asistență", "Cu ce vă putem ajuta"],
+  ["Detalii suplimentare", "Etapa proiectului"]
 ];
 
 function doPost(e) {
@@ -24,16 +25,16 @@ function doPost(e) {
     const val = k => String(d[k] == null || d[k] === "" ? "-" : d[k]).slice(0, 5000);
     if (val("Nume și prenume") === "-") throw new Error("Lipsește numele.");
 
-    const rows = FIELDS.map(k =>
+    const rows = FIELDS.map(([k, label]) =>
       '<tr><th style="text-align:left;vertical-align:top;padding:8px 12px;background:#EAEFF3;border:1px solid #d5dde5;width:34%">' +
-      esc(k) + '</th><td style="padding:8px 12px;border:1px solid #d5dde5">' +
+      esc(label) + '</th><td style="padding:8px 12px;border:1px solid #d5dde5">' +
       esc(val(k)).replace(/\n/g, "<br>") + "</td></tr>"
     ).join("");
     const html =
       '<div style="font-family:Arial,sans-serif;color:#1A2533">' +
       '<p>Proiect nou trimis din formularul de pe a2statisticalanalysis.ro:</p>' +
       '<table style="border-collapse:collapse;font-size:14px;max-width:720px">' + rows + "</table></div>";
-    const text = FIELDS.map(k => k + ": " + val(k)).join("\n\n");
+    const text = FIELDS.map(([k, label]) => label + ": " + val(k)).join("\n\n");
 
     const opts = { htmlBody: html, name: "Formular A2 Statistical Analysis" };
     const re = String(d._replyto || "");

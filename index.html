@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>A2 Statistical Analysis | Cercetare clinică și statistică medicală</title>
-<meta name="description" content="Asistență în cercetarea clinică: de la proiectarea studiului și analiza statistică până la publicarea articolului.">
+<meta name="description" content="Analiză statistică pentru cercetare medicală și sprijin editorial pentru articole științifice.">
 <link rel="canonical" href="https://a2statisticalanalysis.ro/">
 <!-- Previzualizarea linkului (WhatsApp, Facebook, LinkedIn). Rețelele cer URL-uri absolute, nu imagini
      base64: fișierele stau în dist/ și sunt publicate de Cloudflare Pages lângă index.html. -->
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="A2 Statistical Analysis">
 <meta property="og:url" content="https://a2statisticalanalysis.ro/">
 <meta property="og:title" content="A2 Statistical Analysis | Cercetare clinică și statistică medicală">
-<meta property="og:description" content="Fiecare studiu are o poveste. O spunem cu cifre. De la întrebarea de cercetare la articolul publicat.">
+<meta property="og:description" content="Fiecare studiu are o poveste. O spunem cu cifre. Analiză statistică pentru cercetare medicală și sprijin editorial pentru articole științifice.">
 <meta property="og:image" content="https://a2statisticalanalysis.ro/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -410,7 +410,6 @@ input::placeholder,textarea::placeholder{color:#8C99A7}
 .check input:checked + .mark::after{transform:rotate(-45deg) scale(1)}
 .opt:has(input:checked){border-color:var(--ink);background:#F3F6F9}
 .opt input:focus-visible + .mark{outline:2px solid var(--signal);outline-offset:2px}
-.opt.whole{border-style:solid;border-width:1px 1px 1px 3px;border-left-color:var(--deep)}
 .err{display:none;color:var(--signal);font-size:.875rem;margin-top:8px}
 .q.invalid .err{display:block}
 .q.invalid input[type=text]{border-color:var(--signal)}
@@ -507,11 +506,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   <section class="hero">
     <div>
       <h1>Fiecare studiu are o poveste. O spunem cu cifre.</h1>
-      <p class="slogan">De la întrebarea de cercetare la articolul publicat.</p>
-      <p class="lede">Oferim asistență specializată, de la proiectarea studiului și analiza datelor până la pregătirea manuscrisului și trimiterea spre publicare.</p>
+      <p class="slogan">Analiză statistică pentru cercetare medicală și sprijin editorial pentru articole științifice.</p>
+      <p class="lede">Verificăm și pregătim bazele de date, realizăm analiza statistică și interpretăm rezultatele. Dacă pregătiți un articol, vă ajutăm să prezentați clar metodele și rezultatele, să revizuiți manuscrisul și să îl pregătiți pentru trimiterea la revistă. Analiza statistică poate fi solicitată și separat.</p>
       <div class="ctas">
         <a class="btn" href="#formular">Descrieți proiectul</a>
-        <a class="btn ghost" href="#articole">Vedeți exemplele</a>
+        <a class="btn ghost" href="#articole">Vedeți exemple</a>
       </div>
     </div>
 
@@ -519,45 +518,33 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
     <div class="roles-head">
       <div>
         <h2 id="rolT">Aportul fiecărei părți</h2>
-        <p>Dumneavoastră aduceți expertiza clinică și datele. Noi ne ocupăm de metodă, analiza statistică și drumul până la publicare. Apăsați pe o etapă pentru detalii.</p>
+        <p>Dumneavoastră ne prezentați studiul, obiectivele și contextul clinic. Noi realizăm analiza datelor și, dacă este cazul, lucrăm cu autorii la revizuirea manuscrisului și la pregătirea lui pentru trimitere. Apăsați pe o etapă pentru detalii.</p>
       </div>
-      <div class="legend" aria-hidden="true"><span class="y"><i></i>Dumneavoastră</span><span class="u"><i></i>Noi, statisticienii</span></div>
+      <div class="legend" aria-hidden="true"><span class="y"><i></i>Dumneavoastră</span><span class="u"><i></i>Echipa A²</span></div>
     </div>
     <ol class="r-list">
-        <li style="--y:70%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw1"><span class="r-num">1</span><span class="r-stage">Ideea și întrebarea de cercetare</span><span class="r-bar" role="img" aria-label="Aproximativ 70% dumneavoastră, 30% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw1" hidden><p class="yy"><b>Dumneavoastră:</b> Propuneți tema și descrieți contextul clinic.</p><p><b>Noi:</b> Formulăm o întrebare de cercetare relevantă clinic, la care datele pot răspunde.</p></div>
-        </li>
-        <li style="--y:30%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw2"><span class="r-num">2</span><span class="r-stage">Obiectivele și designul studiului</span><span class="r-bar" role="img" aria-label="Aproximativ 30% dumneavoastră, 70% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw2" hidden><p class="yy"><b>Dumneavoastră:</b> Precizați ce este fezabil în practica dumneavoastră.</p><p><b>Noi:</b> Definim obiectivele, propunem designul și estimăm dimensiunea eșantionului.</p></div>
-        </li>
-        <li style="--y:85%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw3"><span class="r-num">3</span><span class="r-stage">Colectarea datelor</span><span class="r-bar" role="img" aria-label="Aproximativ 85% dumneavoastră, 15% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw3" hidden><p class="yy"><b>Dumneavoastră:</b> Recrutați participanții și colectați datele.</p><p><b>Noi:</b> Definim variabilele și pregătim șablonul de colectare și regulile de codare.</p></div>
-        </li>
-        <li style="--y:25%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw4"><span class="r-num">4</span><span class="r-stage">Organizarea bazei de date</span><span class="r-bar" role="img" aria-label="Aproximativ 25% dumneavoastră, 75% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw4" hidden><p class="yy"><b>Dumneavoastră:</b> Clarificați particularitățile datelor clinice.</p><p><b>Noi:</b> Verificăm, curățăm și pregătim baza de date pentru analiză.</p></div>
-        </li>
-        <li style="--y:8%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw5"><span class="r-num">5</span><span class="r-stage">Analiza statistică</span><span class="r-bar" role="img" aria-label="Aproximativ 8% dumneavoastră, 92% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw5" hidden><p class="yy"><b>Dumneavoastră:</b> Confirmați prioritățile clinice ale analizei.</p><p><b>Noi:</b> Aplicăm metodele statistice potrivite și prezentăm rezultatele în tabele și figuri.</p></div>
-        </li>
-        <li style="--y:45%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw6"><span class="r-num">6</span><span class="r-stage">Interpretarea rezultatelor</span><span class="r-bar" role="img" aria-label="Aproximativ 45% dumneavoastră, 55% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw6" hidden><p class="yy"><b>Dumneavoastră:</b> Ne oferiți contextul specific pacienților și practicii dumneavoastră.</p><p><b>Noi:</b> Interpretăm rezultatele statistic și clinic, în raport cu literatura de specialitate și limitele studiului.</p></div>
+        <li style="--y:60%">
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw1"><span class="r-num">1</span><span class="r-stage">Obiectivele și datele studiului</span><span class="r-bar" role="img" aria-label="Aproximativ 60% dumneavoastră, 40% echipa A²"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw1" hidden><p class="yy"><b>Dumneavoastră:</b> Ne comunicați întrebarea de cercetare, obiectivele, designul și stadiul colectării datelor.</p><p><b>Echipa A²:</b> Verificăm ce analize pot răspunde obiectivelor, în funcție de design și de datele disponibile.</p></div>
         </li>
         <li style="--y:35%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw7"><span class="r-num">7</span><span class="r-stage">Redactarea manuscrisului</span><span class="r-bar" role="img" aria-label="Aproximativ 35% dumneavoastră, 65% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw7" hidden><p class="yy"><b>Dumneavoastră:</b> Verificați detaliile specifice studiului și aprobați versiunea finală.</p><p><b>Noi:</b> Redactăm manuscrisul complet, integrând contextul clinic, metodologia, rezultatele și discuția.</p></div>
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw2"><span class="r-num">2</span><span class="r-stage">Pregătirea bazei de date</span><span class="r-bar" role="img" aria-label="Aproximativ 35% dumneavoastră, 65% echipa A²"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw2" hidden><p class="yy"><b>Dumneavoastră:</b> Clarificați semnificația variabilelor și particularitățile datelor.</p><p><b>Echipa A²:</b> Verificăm consistența și codarea datelor, identificăm valorile lipsă și pregătim baza pentru analiză.</p></div>
         </li>
-        <li style="--y:20%">
-          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw8"><span class="r-num">8</span><span class="r-stage">Alegerea revistei și trimiterea</span><span class="r-bar" role="img" aria-label="Aproximativ 20% dumneavoastră, 80% noi"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
-          <div class="r-who" id="rw8" hidden><p class="yy"><b>Dumneavoastră:</b> Aprobați revista și versiunea pentru trimitere.</p><p><b>Noi:</b> Propunem reviste potrivite, pregătim trimiterea și formulăm împreună răspunsurile către recenzenți.</p></div>
+        <li style="--y:15%">
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw3"><span class="r-num">3</span><span class="r-stage">Analiza statistică și interpretarea</span><span class="r-bar" role="img" aria-label="Aproximativ 15% dumneavoastră, 85% echipa A²"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw3" hidden><p class="yy"><b>Dumneavoastră:</b> Confirmați prioritățile clinice și discutați cu noi semnificația rezultatelor.</p><p><b>Echipa A²:</b> Realizăm analiza statistică, pregătim tabelele și figurile și explicăm ce concluzii permit datele și care sunt limitele lor.</p></div>
+        </li>
+        <li style="--y:70%">
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw4"><span class="r-num">4</span><span class="r-stage">Asistența la redactare și revizuire</span><span class="r-bar" role="img" aria-label="Aproximativ 70% dumneavoastră, 30% echipa A²"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw4" hidden><p class="yy"><b>Dumneavoastră:</b> Elaborați manuscrisul și aprobați versiunea finală.</p><p><b>Echipa A²:</b> Vă ajutăm să structurați textul, să prezentați clar metodele și rezultatele și să revizuiți manuscrisul.</p></div>
+        </li>
+        <li style="--y:50%">
+          <button class="r-head" type="button" aria-expanded="false" aria-controls="rw5"><span class="r-num">5</span><span class="r-stage">Alegerea revistei și pregătirea trimiterii</span><span class="r-bar" role="img" aria-label="Aproximativ 50% dumneavoastră, 50% echipa A²"><span class="y"></span><span class="u"></span></span><svg class="r-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="r-who" id="rw5" hidden><p class="yy"><b>Dumneavoastră:</b> Alegeți revista și aprobați documentele pentru trimitere.</p><p><b>Echipa A²:</b> Propunem reviste potrivite, vă ajutăm să adaptați manuscrisul la cerințele editoriale și colaborăm la răspunsurile către recenzori.</p></div>
         </li>
     </ol>
-    <p class="r-note">Proporțiile sunt orientative. Le stabilim împreună, în funcție de proiect.</p>
+    <p class="r-note">Pentru proiectele doctorale, stabilim serviciile în funcție de contribuția proprie a doctorandului și de cerințele școlii doctorale. Pentru articole, contribuțiile echipei și serviciile remunerate se declară conform politicii revistei. Proporțiile sunt orientative.</p>
   </section>
   </section>
   </main>
@@ -568,8 +555,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
     <div class="about-grid">
       <div>
         <h2 id="despreT"><span class="ln"><span>Perspectiva clinicianului,</span></span><span class="ln"><span>rigoarea statisticianului</span></span></h2>
-        <p class="a-fade rv">Suntem Alexandru Găitoane și Andrei Dăescu, medici specialiști psihiatri, cu specializare în cercetare clinică și statistică medicală și experiență în proiecte de cercetare și publicații științifice în mai multe specialități medicale.</p>
-        <p class="a-fade rv">Vă însoțim de la formularea întrebării de cercetare până la interpretarea rezultatelor în context clinic, alegerea revistei și trimiterea spre publicare.</p>
+        <p class="a-fade rv">Suntem Dr. Alexandru Găitoane și Dr. Andrei Dăescu, medici specialiști psihiatri, cu pregătire în cercetare clinică și statistică medicală și experiență în proiecte și publicații din mai multe specialități medicale.</p>
+        <p class="a-fade rv">Realizăm analize statistice pentru medici, doctoranzi și echipe de cercetare. Lucrăm cu autorii pentru ca metodele și rezultatele să fie prezentate clar în manuscris.</p>
       </div>
       <div class="mx" aria-label="Metode cu care lucrăm">
         <div class="mx-tabs" role="tablist" aria-label="Categorii de metode"><button class="mx-tab" type="button" role="tab" id="mx-t1" aria-controls="mx-p1" aria-selected="true" tabindex="0">Analize statistice<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t2" aria-controls="mx-p2" aria-selected="false" tabindex="-1">Diagnostic și predicție<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t3" aria-controls="mx-p3" aria-selected="false" tabindex="-1">Sinteza dovezilor<span class="bar" aria-hidden="true"><i></i></span></button><button class="mx-tab" type="button" role="tab" id="mx-t4" aria-controls="mx-p4" aria-selected="false" tabindex="-1">Inteligență artificială<span class="bar" aria-hidden="true"><i></i></span></button></div>
@@ -598,8 +585,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2 id="artT">Exemple din publicațiile noastre</h2>
-        <p>Figuri, tabele și fragmente din articolele noastre, de la analiza statistică la interpretarea clinică. Selectați o imagine pentru a o mări.</p>
+        <h2 id="artT">Exemple din publicații</h2>
+        <p>Selecție de articole științifice la care au contribuit membri ai echipei A². Selectați o imagine pentru a o mări.</p>
       </div>
       <span class="counter" id="counter" aria-live="polite">1 din 5</span>
     </div>
@@ -697,33 +684,29 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
           <legend>Ce tip de proiect aveți în vedere? <span class="req" aria-hidden="true">*</span></legend>
           <span class="help">Alegeți o singură opțiune.</span>
           <div class="opts">
-            <label class="opt"><input type="radio" name="tip" value="Articol științific independent"><span class="mark"></span>Articol științific independent</label>
-            <label class="opt"><input type="radio" name="tip" value="Unul sau mai multe articole pentru teza de doctorat"><span class="mark"></span>Unul sau mai multe articole pentru teza de doctorat</label>
-            <label class="opt"><input type="radio" name="tip" value="Mai multe articole în cadrul unui alt proiect de cercetare"><span class="mark"></span>Mai multe articole în cadrul unui alt proiect de cercetare</label>
+            <label class="opt"><input type="radio" name="tip" value="Un singur articol științific"><span class="mark"></span>Un singur articol științific</label>
+            <label class="opt"><input type="radio" name="tip" value="Mai multe articole științifice"><span class="mark"></span>Mai multe articole științifice</label>
             <label class="opt"><input type="radio" name="tip" value="Alt tip de proiect"><span class="mark"></span>Alt tip de proiect</label>
           </div>
           <span class="err">Alegeți tipul de proiect.</span>
         </fieldset>
 
         <fieldset class="q check" data-q="etape">
-          <legend>Pentru ce etape aveți nevoie de asistență specializată? <span class="req" aria-hidden="true">*</span></legend>
+          <legend>Cu ce vă putem ajuta? <span class="req" aria-hidden="true">*</span></legend>
           <span class="help">Puteți selecta mai multe opțiuni.</span>
           <div class="opts">
-            <label class="opt whole"><input type="checkbox" name="etape" value="Întregul proiect" data-exclusive><span class="mark"></span>Întregul proiect, de la planificarea studiului până la trimiterea manuscrisului spre publicare</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Formularea obiectivelor și proiectarea studiului"><span class="mark"></span>Formularea obiectivelor și proiectarea studiului</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Organizarea și verificarea bazei de date"><span class="mark"></span>Organizarea și verificarea bazei de date</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Analiză statistică, inclusiv tabele și figuri"><span class="mark"></span>Analiză statistică, inclusiv tabele și figuri</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Interpretarea rezultatelor"><span class="mark"></span>Interpretarea rezultatelor</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Redactarea sau revizuirea manuscrisului"><span class="mark"></span>Redactarea sau revizuirea manuscrisului</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Alegerea revistei și trimiterea manuscrisului"><span class="mark"></span>Alegerea revistei și trimiterea manuscrisului</label>
-            <label class="opt"><input type="checkbox" name="etape" value="Aș dori să stabilim împreună" data-exclusive><span class="mark"></span>Aș dori să stabilim împreună</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Organizarea și verificarea bazei de date, analiza statistică și interpretarea rezultatelor"><span class="mark"></span>Organizarea și verificarea bazei de date, analiza statistică și interpretarea rezultatelor</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Asistență la redactarea și revizuirea manuscrisului"><span class="mark"></span>Asistență la redactarea și revizuirea manuscrisului</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Alegerea revistei și pregătirea manuscrisului pentru trimitere"><span class="mark"></span>Alegerea revistei și pregătirea manuscrisului pentru trimitere</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Asistență la pregătirea răspunsurilor către recenzori"><span class="mark"></span>Asistență la pregătirea răspunsurilor către recenzori</label>
+            <label class="opt"><input type="checkbox" name="etape" value="Aș dori să stabilim împreună serviciile potrivite" data-exclusive><span class="mark"></span>Aș dori să stabilim împreună serviciile potrivite</label>
           </div>
-          <span class="err">Alegeți cel puțin o etapă.</span>
+          <span class="err">Alegeți cel puțin o opțiune.</span>
         </fieldset>
 
         <div class="q" data-q="detalii">
-          <label class="qt" for="detalii">Altceva ce ar trebui să știm?</label>
-          <span class="help">Opțional. Termene, stadiul datelor, revista vizată. Fără date despre pacienți.</span>
+          <label class="qt" for="detalii">În ce etapă se află proiectul?</label>
+          <span class="help">Opțional. Puteți menționa dacă datele sunt deja colectate, dacă aveți un manuscris în lucru, termenul și revista vizată.</span>
           <textarea id="detalii" name="detalii"></textarea>
         </div>
 
@@ -929,7 +912,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   var form = document.getElementById("form"), send = document.getElementById("send"), status = document.getElementById("status");
   var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, PHONE = /(\+?\d[\d\s().-]{7,}\d)/;
 
-  // "Întregul proiect" și "Să stabilim împreună" exclud celelalte opțiuni
+  // "Aș dori să stabilim împreună serviciile potrivite" exclude celelalte opțiuni
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="etape"]'));
   boxes.forEach(function(b){
     b.addEventListener("change", function(){
@@ -988,8 +971,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
       "Contact: " + v.contact,
       "Specialitate și temă: " + v.tema,
       "Tip de proiect: " + v.tip,
-      "Etape: " + v.etape.join("; "),
-      "Detalii: " + (v.detalii || "-")
+      "Cu ce vă putem ajuta: " + v.etape.join("; "),
+      "Etapa proiectului: " + (v.detalii || "-")
     ].join("\n");
     return "mailto:" + RECIPIENT + "?subject=" + encodeURIComponent("Proiect nou: " + v.nume) + "&body=" + encodeURIComponent(body);
   }
@@ -1017,6 +1000,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
       "Contact": v.contact,
       "Specialitate și temă": v.tema,
       "Tip de proiect": v.tip,
+      // Cheile rămân cele vechi (le cunoaște scriptul Google); etichetele din e-mail sunt în apps-script/Code.gs.
       "Etape pentru care se cere asistență": v.etape.join("; "),
       "Detalii suplimentare": v.detalii || "-",
       "_subject": "Proiect nou: " + v.nume + " (" + v.tema.slice(0, 60) + ")"

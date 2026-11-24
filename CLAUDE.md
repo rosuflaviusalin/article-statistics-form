@@ -67,20 +67,22 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 1. **Header**: logo A2 Statistical Analysis + meniu (Despre noi, Aportul fiecărei părți, Exemple, Formular).
    Numele de brand afișat peste tot este „A2 Statistical Analysis” (nu „Găitoane & Dăescu”).
 2. **Hero**: titlul „Fiecare studiu are o poveste. O spunem cu cifre.”, sloganul
-   „De la întrebarea de cercetare la articolul publicat.”, butoane. În dreapta, panoul
-   **„Aportul fiecărei părți”**: acordeon compact cu 8 etape (un rând = număr, nume, bară împărțită
+   „Analiză statistică pentru cercetare medicală și sprijin editorial pentru articole științifice.”, un paragraf
+   (analiza statistică poate fi cerută și separat), butoane. În dreapta, panoul
+   **„Aportul fiecărei părți”**: acordeon compact cu 5 etape (un rând = număr, nume, bară împărțită
    client chihlimbar `#E0A23A` / statisticieni bleumarin `--deep`); la click se deschide `.r-who` cu
-   textele „Dumneavoastră / Noi” (un singur rând deschis odată). Panoul trebuie să încapă lângă titlu, fără scroll. Proporția clientului e în `style="--y:NN%"` pe fiecare `<li>`.
+   textele „Dumneavoastră / Echipa A²” (un singur rând deschis odată). Panoul trebuie să încapă lângă titlu, fără scroll. Proporția clientului e în `style="--y:NN%"` pe fiecare `<li>`.
    Proporțiile și textele sunt estimări, de validat cu medicii.
 3. **Despre noi** („Perspectiva clinicianului, rigoarea statisticianului”): text în stânga, în dreapta
    **explorator de metode** `.mx`: 4 file (Analize statistice, Diagnostic și predicție, Sinteza dovezilor,
    Inteligență artificială) cu derulare automată la 6 s (bară roșie), oprită la hover și după primul click;
    fiecare filă are o mini-ilustrație SVG animată (bare + regresie, curbă ROC, selecția studiilor printr-o pâlnie → diamant, rețea neuronală),
    o frază și lista de metode. Intrarea secțiunii: IntersectionObserver adaugă `.anim` apoi `.in` pe `.about`.
-4. **Exemple din publicațiile noastre**: galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
+4. **Exemple din publicații** („Selecție de articole științifice la care au contribuit membri ai echipei A²”): galerie „stacked card carousel” (foi suprapuse `.stage/.sheet`,
    index lateral `.index`, lightbox `<dialog id="lb">`, săgeți tastatură + swipe).
    Datele imaginilor sunt în array-ul JS `ARTICLES`.
-5. **Formular**: cele 5 întrebări despre proiect + câmp opțional „detalii”, honeypot `_honey`,
+5. **Formular**: nume, contact, temă, tip proiect (un articol / mai multe / alt tip), „Cu ce vă putem ajuta?”
+   (servicii, bife), câmp opțional „În ce etapă se află proiectul?”, honeypot `_honey`,
    avertisment să nu se trimită date despre pacienți.
 6. **Footer** + **nota de informare GDPR** (`<dialog id="privacy">`, deschisă de orice `[data-privacy]`).
 
@@ -89,8 +91,12 @@ docs/               # imaginile articolelor (nume descriptive, ex. clustere-pca.
 - Configurare în JS: `RECIPIENT` (`a2statisticalanalysis@gmail.com`, folosit la `mailto:`) și `ENDPOINT`
   (URL-ul Web app al scriptului). Destinatarul real e constanta `RECIPIENT` din `Code.gs`.
 - După trimitere: „Mulțumim, <prenume>.” (funcția `prenume()`: tot ce urmează după primul cuvânt din „Nume și prenume”).
-- Validare client: nume, contact (e-mail sau telefon), temă, tip proiect (radio), cel puțin o etapă.
-  „Întregul proiect” și „Aș dori să stabilim împreună” sunt exclusive (`data-exclusive`).
+- Validare client: nume, contact (e-mail sau telefon), temă, tip proiect (radio), cel puțin un serviciu.
+  „Aș dori să stabilim împreună serviciile potrivite” e exclusivă (`data-exclusive`).
+- Poziționare (2026-11-24): echipa face analiza statistică și **sprijin editorial** (revizuire, pregătirea trimiterii),
+  nu redactează articolul în locul autorilor. Nu promite „de la întrebare la articolul publicat”.
+- Cheile din payload rămân vechi (`Etape pentru care se cere asistență`, `Detalii suplimentare`); etichetele
+  afișate în e-mail se schimbă în `FIELDS` din `apps-script/Code.gs`.
 - Payload: chei în română + `_subject`, `_replyto` (devine Reply-To dacă e un e-mail valid). Răspuns: `{"success":true}`.
 - Fallback la eroare: link `mailto:` cu toate răspunsurile precompletate.
 - Modificarea scriptului: în script.google.com → Deploy → Manage deployments → creion → New version
